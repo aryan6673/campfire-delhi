@@ -66,17 +66,13 @@ function App() {
           </nav>
         </header>
 
-        <section className="relative h-screen flex items-center px-6 md:px-16 lg:px-24" style={{
-          background: `
-            url(/backgrounds/blue-sky.png),
-            url(/backgrounds/sky-shine.png),
-            url(/backgrounds/bottom-cloud.png)
-          `,
-          backgroundPosition: 'center top, center top, center top',
-          backgroundSize: 'cover, cover, cover'
+        <section className="relative h-full flex items-end pb-32 2xl:pb-48 px-6 md:px-16 lg:px-24 2xl:px-32" style={{
+          background: `url(/backgrounds/blue-sky.png)`,
+          backgroundPosition: 'center top',
+          backgroundSize: 'cover'
         }}>
           <div className="absolute top-0 left-0 w-full h-full">
-            <img src="/backgrounds/sky-shine.png" alt="" />
+            <img src="/backgrounds/sky-shine.png" alt="" className="w-full h-full object-cover" />
           </div>
 
           <div className="absolute bottom-[32px] right-[140px] w-full h-full">
@@ -184,9 +180,9 @@ function App() {
             {/* Right side - Video section */}
             <div className="relative w-full lg:w-auto">
               {/* Text and arrow above video */}
-              <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="flex items-center justify-center gap-3 mb-4 2xl:mb-8">
                 <p 
-                  className="text-white text-2xl md:text-4xl font-bold"
+                  className="text-white text-2xl 2xl:text-6xl md:text-4xl font-bold"
                   style={{ 
                     fontFamily: fonts.amaticBold,
                     fontWeight: 'bold',
@@ -202,7 +198,7 @@ function App() {
                   className="w-[45px] md:w-[55px] h-[33px] md:h-[41px] translate-y-6 rotate-[6.2deg] z-50"
                 />
               </div>
-              {/* Video with rotation */}
+
               <div className="relative transform rotate-[1.7deg]">
                 <img 
                   src="/ui/video-placeholder.png" 
@@ -220,7 +216,7 @@ function App() {
       </div>
 
       {/* Steps */}
-      <section className="relative py-48 pb-96" style={{
+      <section className="relative pt-[13vw] pb-96" style={{
         background: `url(/backgrounds/underwater-gradient.png)`,
         backgroundSize: 'cover'
       }}>
@@ -389,9 +385,8 @@ function App() {
           <img src="/decorative/clouds-3.png" alt="" className="w-full h-full object-cover" />
         </div>
 
-        <div className="relative w-full h-full z-50 -translate-y-32" style={{
-          background: `url(/backgrounds/world-map.png)`,
-          backgroundSize: 'cover'
+        <div className="relative w-full h-full z-50 -translate-y-32 bg-no-repeat bg-center bg-contain" style={{
+          backgroundImage: `url(/backgrounds/world-map.png)`,
         }}>
           
         </div>
@@ -403,7 +398,7 @@ function App() {
           url(/backgrounds/blue-gradient.png)
         `
       }}>
-        <div className="absolute bottom-0 left-0">
+        <div className="absolute bottom-0 left-0 w-full">
           <img
             src="/decorative/clouds-1.png"
             alt=""
@@ -419,21 +414,13 @@ function App() {
           />
         </div>
 
-        <div className="absolute bottom-[-1300px] scale-105 left-0 w-full">
+        <div className="absolute bottom-[64px] translate-y-full scale-105 left-0 w-full">
           <img
             src="/decorative/puzzle-composite.png"
             alt=""
             className="w-full h-full object-cover"
           />
         </div>
-
-        {/* <div className="absolute bottom-0 left-0 w-full h-full">
-          <img
-            alt=""
-            src="decorative/clouds-1.png"
-            className="w-full h-full object-cover transform"
-          />
-        </div> */}
 
         <div className="relative z-10 flex flex-col gap-12 items-center px-32 max-w-7xl mx-auto -translate-y-56">
           <h2 
@@ -541,7 +528,7 @@ function App() {
         </div>
       </section>
 
-      <section className="relative bg-[#384fbc] pb-48 pt-64 -translate-y-96 -z-20">
+      <section className="bg-[#384fbc] pb-[20vw] pt-[20vw] -translate-y-96 -z-20">
         <div className="flex flex-col gap-8 items-center px-8 max-w-7xl mx-auto">
           <h2 
             className="text-[#f1ebff] text-6xl font-bold text-center mb-8"
@@ -662,7 +649,7 @@ function App() {
           </div>
         </div>
 
-        <div className="absolute bottom-[-330px] scale-105 left-0 w-full">
+        <div className="absolute bottom-[-250px] scale-105 left-0 w-full">
           <img
             src="/decorative/puzzle-cloud-bottom.png"
             alt=""
@@ -746,36 +733,14 @@ function App() {
             </div>
           </div>
         </div>
-        
-        <div className="absolute -bottom-[100px] left-1/2 transform -translate-x-1/2 w-[800px] h-[150px]" style={{
-          backgroundImage: `url(/ui/faq-speech-bubble.svg)`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          transform: 'translateX(-50%) rotate(180deg)'
-        }} />
       </section>
 
-      <footer className="relative h-[800px]" style={{
-        background: `
-          url(/backgrounds/night-wallpaper.png),
-          url(/backgrounds/stars.png),
-          url(/backgrounds/clouds.png),
-          url(/backgrounds/wood.png)
-        `,
-        backgroundSize: 'cover, cover, cover, cover'
-      }}>
-        <div className="absolute bottom-[190px] left-0 w-full h-[420px]">
-          <img src="/backgrounds/grass.png" alt="" className="w-full h-full object-cover" />
-        </div>
-
-        <div className="absolute bottom-[190px] left-[483px] w-[791px] h-[562px]">
-          <img src="/characters/ghosts.png" alt="" className="w-full h-full object-cover" />
-        </div>
-        
-        <div className="absolute bottom-[190px] right-[380px] w-[363px] h-[483px]">
-          <img src="/characters/campfire.png" alt="" className="w-full h-full object-cover" />
-        </div>
+      <footer className="relative -translate-y-96 -z-40">
+        <img
+          src="/backgrounds/footer-background.png"
+          alt=""
+          className="w-full"
+        />
 
         <div className="absolute bottom-0 left-0 w-full h-[190px] bg-[#0f371d] flex items-center justify-center">
           <p 
