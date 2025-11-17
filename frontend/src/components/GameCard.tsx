@@ -11,6 +11,7 @@ function GameCard({ imageSrc, imageAlt, title, author, href }: GameCardProps) {
     <div className="flex flex-col gap-9 items-center w-[400px]">
       <a 
         href={href}
+        target="_blank"
         className="block"
       >
         <img 
