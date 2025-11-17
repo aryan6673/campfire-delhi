@@ -240,7 +240,7 @@ function App() {
         </div>
       </section>
 
-      <section className="relative h-[900px] px-8">
+      <section className="relative h-[900px] px-8 z-30">
         <div className="absolute top-0 left-0 w-full h-full -translate-y-96 from-transparent to-[#022994] bg-gradient-to-b pointer-events-none">
           <img src="/decorative/clouds-3.png" alt="" className="w-full h-full object-cover select-none" />
         </div>
@@ -250,7 +250,7 @@ function App() {
         </div>
       </section>
 
-      <section className="relative py-24 bg-[#384fbc] -translate-y-100 bg-cover bg-center -z-10 pt-130 pb-60 bg-[url(/backgrounds/blue-gradient.png)]">
+      <section className="relative py-24 bg-[#384fbc] -translate-y-100 bg-cover bg-center z-20 pt-130 pb-60 bg-[url(/backgrounds/blue-gradient.png)]">
         <div className="absolute bottom-0 left-0 w-full pointer-events-none">
           <img
             src="/decorative/clouds-1.png"
@@ -311,7 +311,7 @@ function App() {
         </div>
       </section>
 
-      <section className="bg-[#384fbc] pb-[20vw] pt-[20vw] -translate-y-96 -z-20">
+      <section className="bg-[#384fbc] pb-[20vw] pt-[20vw] -translate-y-96 z-10">
         <div className="flex flex-col gap-8 items-center px-8 max-w-7xl mx-auto">
           <h2 
             className="text-[#f1ebff] text-6xl font-bold text-center mb-8 font-amatic"
@@ -358,12 +358,12 @@ function App() {
         </div>
       </section>
 
-      <section className="relative bg-[#384fbc] pb-32 pt-64 -translate-y-96 -z-30">
+      <section className="relative bg-[#384fbc] pb-32 pt-64 -translate-y-96">
         <div className="absolute w-full h-full -z-10 pointer-events-none">
           <img 
             src="/decorative/speech-bubble-bg.png" 
             alt="" 
-            className="w-full h-full select-none"
+            className="w-full h-full select-none pointer-events-none"
           />
         </div>
 
@@ -378,7 +378,7 @@ function App() {
             FAQ
           </h2>
 
-          <div className="flex gap-10 justify-center items-end">
+          <div className="flex gap-10 justify-center items-start">
             <div className="relative">
               <div className="absolute inset-0 w-[608px] h-[1491px] pointer-events-none">
                 <img src="/ui/faq-participant-bg.svg" alt="" className="w-full h-full object-cover select-none" />

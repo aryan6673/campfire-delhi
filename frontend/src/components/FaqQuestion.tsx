@@ -28,7 +28,7 @@ function FaqQuestion({ question, children }: FaqQuestionProps) {
         }`}
       >
         <div className="bg-[#6b2f26] shadow-[8px_8px_0px_0px_#5a251e] px-12 py-8 -mt-2">
-          <p className="text-white text-3xl font-normal leading-relaxed font-amatic">
+          <p className="text-white text-3xl leading-relaxed font-amatic font-bold">
             {children}
           </p>
         </div>
