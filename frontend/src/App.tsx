@@ -165,10 +165,16 @@ function App() {
               </div>
 
               <div className="relative transform rotate-[1.7deg]">
-                <img 
-                  src="/ui/video-placeholder.png" 
-                  alt="Campfire video" 
-                  className="w-full max-w-[442px] h-[200px] md:h-[259px] rounded-2xl shadow-[12px_12px_0px_0px_rgba(0,0,0,0.25)] object-cover mx-auto"
+                <iframe 
+                  width="442" 
+                  height="249" 
+                  src="https://www.youtube.com/embed/oKHU66Ar6Gk?si=tHZjgBqdXn-boVsk" 
+                  title="YouTube video player" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerPolicy="strict-origin-when-cross-origin" 
+                  allowFullScreen
+                  className="w-full max-w-[442px] aspect-video rounded-2xl shadow-[12px_12px_0px_0px_rgba(0,0,0,0.25)] mx-auto"
                 />
               </div>
             </div>
