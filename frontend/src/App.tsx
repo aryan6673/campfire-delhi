@@ -4,8 +4,12 @@ import Step from './components/Step.js';
 import StoryCard from './components/StoryCard.js';
 import GameCard from './components/GameCard.js';
 import NavbarLink from './components/NavbarLink.tsx';
+import { useRef, useState } from 'react';
 
 function App() {
+  const [email, setEmail] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -110,25 +114,34 @@ function App() {
                   className="bg-[#f9e2ca] border-4 border-[#d5a16c] rounded-[20px] px-4 md:px-8 py-4 flex items-center gap-3 md:gap-6 w-full transform rotate-[-1.2deg] shadow-[0_8px_20px_rgba(0,0,0,0.25)]"
                 >
                   <img src="/icons/email.svg" alt="" className="w-6 h-5 flex-shrink-0 select-none" />
-                  <input 
+                  <input
+                    ref={emailRef}
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                     type="email"
                     className="text-[#854d16] text-2xl md:text-4xl font-bold truncate bg-transparent border-none outline-none flex-1 cursor-text font-amatic"
                     placeholder="you@hackclub.com"
                     defaultValue="you@hackclub.com"
                   />
                 </div>
+                
                 <button 
-                  className="bg-[#fca147] border-[5px] border-[rgba(0,0,0,0.2)] rounded-[20px] px-8 md:px-14 py-4 hover:scale-105 transition-transform w-full md:w-auto transform rotate-[1.5deg] shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95"
+                  className="bg-[#fca147] border-[5px] border-[rgba(0,0,0,0.2)] rounded-[20px] px-8 md:px-14 py-4 hover:scale-105 transition-transform w-max md:w-auto transform rotate-[1.5deg] shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95"
                   type="button"
                   onClick={() => {
-                    // TODO: Implement RSVPs
-                    alert("Sorry, RSVPs are unavailable for now. Stay tuned!");
-                  }}
+                    if (!emailRef?.current?.reportValidity() || !email)
+                      return;
+
+                    window.open(
+                      `https://forms.hackclub.com/t/a3QSt8MuvHus?email=${encodeURIComponent(email)}`,
+                      "_blank"
+                    );
+                  }}  
                 >
                   <p 
                     className="text-[#8d3f34] text-3xl md:text-5xl font-normal font-dream-planner"
                   >
-                    RSVP!
+                   ORGANIZE!
                   </p>
                 </button>
               </div>
