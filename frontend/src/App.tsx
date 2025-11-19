@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="w-full min-h-screen flex flex-col overflow-x-hidden">
-      <div className="absolute top-0 left-0 w-1/3 z-10 pointer-events-none">
+      <div className="absolute top-0 left-0 w-1/3 z-10 pointer-events-none hidden lg:block">
         <img 
           src="/backgrounds/corner-cloud.png" 
           alt=""
@@ -32,8 +32,8 @@ function App() {
       </div>
 
       <div className="w-full h-screen">
-        <header className="relative h-[115px] bg-[#45b4f5] flex justify-end items-center pr-16">
-          <nav className="flex gap-12 items-center text-white text-5xl font-bold font-amatic">
+        <header className="relative h-[80px] lg:h-[115px] bg-[#45b4f5] flex justify-end items-center pr-16">
+          <nav className="flex gap-4 text-3xl lg:gap-12 items-center text-white lg:text-5xl font-bold font-amatic">
             <NavbarLink onClick={() => scrollToSection('steps')}>Steps</NavbarLink>
             {/* <NavbarLink onClick={() => scrollToSection('map')}>Map</NavbarLink> */}
             <NavbarLink onClick={() => scrollToSection('letter')}>Letter</NavbarLink>
@@ -59,7 +59,7 @@ function App() {
             </div>
           </div>
 
-          <div className="absolute bottom-[160px] left-0 w-full h-full animate-cloud-float-right pointer-events-none">
+          <div className="absolute bottom-0 lg:bottom-[160px] flex items-end lg:block left-0 w-full h-full lg:animate-cloud-float-right pointer-events-none">
             <img src="/backgrounds/bottom-cloud.png" alt="" className="select-none" />
           </div>
  
@@ -67,7 +67,7 @@ function App() {
             <img src="/decorative/vines.png" alt="" className="w-full h-full object-cover object-top select-none" />
           </div>
 
-          <div className="flex flex-col lg:flex-row justify-between items-center w-full gap-8 pb-24 z-10">
+          <div className="flex flex-col lg:flex-row justify-between items-center w-full gap-8 pb-24 z-10 h-full pt-16 lg:pt-0 lg:h-auto">
             <div className="flex flex-col gap-4 w-full lg:w-[648px]">
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-4">
@@ -109,7 +109,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row items-center gap-2">
+              <div className="flex flex-col md:flex-row items-center gap-6 lg:gap-2">
                 <div 
                   className={clsx(
                     "bg-[#f9e2ca] border-4 border-[#d5a16c] rounded-[20px] px-4 md:px-8 py-4 flex items-center gap-3 md:gap-6 w-full transform rotate-[-1.2deg] shadow-[0_8px_20px_rgba(0,0,0,0.25)]",
@@ -130,7 +130,7 @@ function App() {
                 </div>
                 
                 <button 
-                  className="bg-[#fca147] border-[5px] border-[rgba(0,0,0,0.2)] rounded-[20px] px-8 md:px-14 py-4 hover:scale-105 transition-transform w-max md:w-auto transform rotate-[1.5deg] shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95"
+                  className="bg-[#fca147] border-[5px] border-[rgba(0,0,0,0.2)] rounded-[20px] px-8 md:px-14 py-4 hover:scale-105 transition-transform w-full md:w-auto transform rotate-[1.5deg] shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95"
                   type="button"
                   onClick={() => {
                     if (!emailRef?.current?.reportValidity() || !email)
@@ -154,7 +154,7 @@ function App() {
             <div className="relative w-full lg:w-auto">
               <div className="flex items-center justify-center gap-3 mb-4 2xl:mb-8">
                 <p 
-                  className="text-white text-2xl 2xl:text-6xl md:text-4xl font-bold font-amatic"
+                  className="text-white text-4xl 2xl:text-6xl md:text-4xl font-bold font-amatic"
                   style={{ 
                     textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                   }}
@@ -179,7 +179,7 @@ function App() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
-                  className="w-full max-w-[442px] aspect-video rounded-2xl shadow-[12px_12px_0px_0px_rgba(0,0,0,0.25)] mx-auto"
+                  className="h-[180px] lg:h-[250px] w-auto lg:w-full lg:max-w-[442px] aspect-video rounded-2xl shadow-[12px_12px_0px_0px_rgba(0,0,0,0.25)] mx-auto"
                 />
               </div>
             </div>
@@ -250,16 +250,16 @@ function App() {
         </div>
       </section>
 
-      <section className="relative h-[800px] pb-8 px-8 z-30 -mt-96">
+      <section className="relative h-full lg:h-[800px] pb-8 px-8 z-30 -mt-96">
         <div className="absolute top-0 left-0 w-full h-full from-transparent to-[#022994] bg-gradient-to-b pointer-events-none">
           <img src="/decorative/clouds-3.png" alt="" className="w-full h-full object-cover select-none" />
         </div>
 
-        <div id="letter" className="relative w-full h-full z-50 translate-y-64 flex justify-center">
-          <img src='/backgrounds/world-map-left.png' alt='' className='h-full' />
-          <div className='relative'>
-            <img src='/backgrounds/world-map-right.png' alt='' className='h-full' />
-            <div className='absolute top-0 left-0 pt-30 pl-12 pr-64 text-2xl flex flex-col gap-6 font-solway'>
+        <div id="letter" className="relative w-full h-full z-50 translate-y-20 lg:translate-y-64 flex justify-center">
+          <img src='/backgrounds/world-map-left.png' alt='' className='h-full hidden lg:block' />
+          <div className='flex items-center lg:block lg:relative'>
+            <img src='/backgrounds/world-map-right.png' alt='' className='h-full hidden lg:block' />
+            <div className='lg:absolute lg:top-0 lg:left-0 pt-16 pb-16 lg:pb-0 rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.25)] lg:rounded-none lg:shadow-none lg:pt-30 pl-6 lg:pl-12 pr-6 lg:pr-64 text-xl bg-[#EAD6BE] border-[#DCA87E] border-4 lg:border-0 lg:bg-transparent lg:text-2xl flex flex-col gap-6 font-solway'>
               <h1>Dear Hackers, Musicians, and Artists,</h1>
               <p>
                 Welcome to Hack Club's newest adventure. This winter we invite you to join us for Campfire, the world's biggest Game Jam happening simultaneously in 100 cities.
@@ -284,7 +284,7 @@ function App() {
         </div>
       </section>
 
-      <section className="relative py-24 bg-[#384fbc] bg-cover bg-center z-20 pt-130 pb-60 bg-[url(/backgrounds/blue-gradient.png)]">
+      <section className="relative py-24 bg-[#384fbc] bg-cover bg-center z-20 pt-90 lg:pt-130 pb-60 bg-[url(/backgrounds/blue-gradient.png)]">
         <div className="absolute bottom-0 left-0 w-full pointer-events-none">
           <img
             src="/decorative/clouds-1.png"
@@ -309,7 +309,7 @@ function App() {
           />
         </div>
 
-        <div className="relative z-10 flex flex-col gap-12 items-center px-32 max-w-7xl mx-auto -translate-y-56">
+        <div className="relative z-10 flex flex-col gap-12 items-center lg:px-32 w-full lg:w-auto lg:max-w-7xl mx-auto -translate-y-56">
           <h2
             id="previous-events"
             className="text-[#d7cfeb] text-6xl font-bold text-center mb-8 font-amatic"
@@ -320,7 +320,7 @@ function App() {
             Stories from past events
           </h2>
           
-          <div className="flex gap-12 justify-between w-full">
+          <div className="flex flex-col lg:flex-row gap-12 justify-between w-full items-center">
             <StoryCard 
               imageSrc="/stories/ascpixi.png"
               imageAlt=""
@@ -356,7 +356,7 @@ function App() {
             Favorite games from past events
           </h2>
           
-          <div className="flex gap-5 w-full justify-between">
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-5 w-full justify-between">
             <GameCard 
               imageSrc="/games/office-click-clack.png"
               imageAlt="Office Click Clack"
@@ -401,7 +401,7 @@ function App() {
           />
         </div>
 
-        <div className="relative z-10 px-32">
+        <div className="relative z-10 lg:px-32">
           <h2
             id="faq"
             className="text-[#d7cfeb] text-[128px] font-bold text-center mb-16 font-amatic"
@@ -412,13 +412,13 @@ function App() {
             FAQ
           </h2>
 
-          <div className="flex gap-10 justify-center items-start">
+          <div className="flex flex-col lg:flex-row gap-10 justify-center items-start">
             <div className="relative">
-              <div className="absolute inset-0 w-[608px] h-[1491px] pointer-events-none">
+              <div className="absolute inset-0 lg:w-[608px] lg:h-[1491px] pointer-events-none">
                 <img src="/ui/faq-participant-bg.svg" alt="" className="w-full h-full object-cover select-none" />
               </div>
               
-              <div className="relative z-10 flex flex-col gap-10 items-center px-16 pt-8 w-[608px]">
+              <div className="relative z-10 flex flex-col gap-10 items-center lg:px-16 pt-8 lg:w-[608px]">
                 <p 
                   className="text-[#d7cfeb] text-6xl font-bold text-center mb-4 font-amatic"
                   style={{ 
@@ -447,12 +447,12 @@ function App() {
               </div>
             </div>
 
-            <div className="relative">
-              <div className="absolute inset-0 w-[608px] h-[1505px] pointer-events-none">
+            <div className="relative w-full lg:w-auto">
+              <div className="absolute inset-0 lg:w-[608px] h-[1505px] pointer-events-none">
                 <img src="/ui/faq-organizer-bg.svg" alt="" className="w-full h-full object-cover select-none" />
               </div>
               
-              <div className="relative z-10 flex flex-col gap-10 items-center px-16 pt-9 w-[608px]">
+              <div className="relative z-10 flex flex-col gap-10 items-center px-16 pt-9 lg:w-[608px]">
                 <p 
                   className="text-[#d7cfeb] text-6xl font-bold text-center mb-4 font-amatic"
                   style={{ 

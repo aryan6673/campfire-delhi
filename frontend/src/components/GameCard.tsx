@@ -8,7 +8,7 @@ interface GameCardProps {
 
 function GameCard({ imageSrc, imageAlt, title, author, href }: GameCardProps) {
   return (
-    <div className="flex flex-col gap-9 items-center w-[400px]">
+    <div className="flex flex-col gap-9 items-center lg:w-[400px]">
       <a 
         href={href}
         target="_blank"
