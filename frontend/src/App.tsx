@@ -498,7 +498,7 @@ function App() {
           className="w-full select-none"
         />
 
-        <div className="absolute bottom-0 left-0 w-full h-[190px] bg-[#0f371d] flex items-center justify-center">
+        <div className="w-full h-[190px] bg-[#0f371d] -mt-3 flex items-center justify-center">
           <p 
             className="text-white text-6xl text-center font-bold font-amatic"
             style={{ 
