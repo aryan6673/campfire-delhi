@@ -265,7 +265,7 @@ function App() {
         <div id="steps" className="relative z-40 flex flex-col gap-24 items-center px-12 max-w-7xl mx-auto">
           <Step 
             stepNumber={1}
-            imageSrc="/ui/step-signup.png"
+            imageSrc="/ui/step-signup.jpeg"
             imageAlt="Step 1"
           >
             Sign up for a <span className="text-[#F77034]">Campfire</span><br /> near you
@@ -282,7 +282,7 @@ function App() {
 
           <Step 
             stepNumber={3}
-            imageSrc="/ui/step-workshops.png"
+            imageSrc="/ui/step-workshops.jpeg"
             imageAlt="Step 3"
           >
             Learn from <span className="text-[#F77034]">workshops</span>, enjoy free food and merch!
@@ -290,7 +290,7 @@ function App() {
 
           <Step 
             stepNumber={4}
-            imageSrc="/ui/step-team.png"
+            imageSrc="/ui/step-build.jpeg"
             imageAlt="Step 4"
             isReversed={true}
           >
