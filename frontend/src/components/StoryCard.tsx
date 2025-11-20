@@ -7,7 +7,7 @@ interface StoryCardProps {
 
 function StoryCard({ imageSrc, imageAlt, title, description }: StoryCardProps) {
   return (
-    <div className="bg-[#d9d9d9] rounded-2xl p-6 flex flex-col gap-2 w-[347px] h-[557px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
+    <div className="bg-white p-6 flex flex-1 basis-0 flex-col gap-2 h-[557px] shadow-[16px_16px_0px_0px_rgba(0,0,0,0.3)]">
       <img 
         src={imageSrc}
         alt={imageAlt}

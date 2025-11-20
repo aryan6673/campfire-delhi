@@ -309,7 +309,7 @@ function App() {
           />
         </div>
 
-        <div className="relative z-10 flex flex-col gap-12 items-center lg:px-32 w-full lg:w-auto lg:max-w-7xl mx-auto -translate-y-56">
+        <div className="relative z-10 flex flex-col gap-12 items-center lg:px-24 w-full lg:w-auto lg:max-w-7xl mx-auto -translate-y-56">
           <h2
             id="previous-events"
             className="text-[#d7cfeb] text-6xl font-bold text-center mb-8 font-amatic"
