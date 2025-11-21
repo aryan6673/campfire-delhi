@@ -28,6 +28,13 @@ function App() {
     }
   };
 
+  function openWithEmail(url: string) {
+    if (!emailRef?.current?.reportValidity() || !email)
+      return;
+
+    window.open(`${url}?email=${encodeURIComponent(email)}`, "_blank");
+  }
+
   return (
     <div className="w-full min-h-screen flex flex-col overflow-x-hidden">
       <div className="absolute top-0 left-0 w-1/3 md:z-40 pointer-events-none">
@@ -156,6 +163,7 @@ function App() {
                   <button 
                     className="bg-[#fca147] border-[5px] border-[rgba(0,0,0,0.2)] rounded-[20px] px-8 md:px-14 py-4 hover:scale-105 transition-transform w-full md:w-auto transform md:rotate-[1.5deg] shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95"
                     type="button"
+                    onClick={() => openWithEmail("https://forms.hackclub.com/campfiring")}
                   >
                     <p 
                       className="text-[#8d3f34] text-3xl md:text-5xl font-normal font-dream-planner"
@@ -170,15 +178,7 @@ function App() {
                 }}>
                   ...or <span
                     className='underline inline-block cursor-pointer transition-transform hover:scale-105 active:scale-95'
-                    onClick={() => {
-                      if (!emailRef?.current?.reportValidity() || !email)
-                        return;
-
-                      window.open(
-                        `https://forms.hackclub.com/t/a3QSt8MuvHus?email=${encodeURIComponent(email)}`,
-                        "_blank"
-                      );
-                    }}
+                    onClick={() => openWithEmail("https://forms.hackclub.com/t/a3QSt8MuvHus")}
                   >
                     RSVP
                   </span> for one
