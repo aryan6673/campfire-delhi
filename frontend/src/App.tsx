@@ -283,7 +283,7 @@ function App() {
             imageSrc="/ui/step-signup.jpeg"
             imageAlt="Step 1"
           >
-            Find a team of <span className="font-bold text-[#F77034]">co-organizers</span>
+            Find a team of <br></br><span className="font-bold text-[#F77034]">CO-ORGANIZERS</span>
           </Step>
 
           <Step 
@@ -292,7 +292,7 @@ function App() {
             imageAlt="Step 2"
             isReversed={true}
           >
-            Find a <span className="font-bold text-[#F77034]">venue</span> to host your hackathon
+            Find a <span className="font-bold text-[#F77034]">VENUE</span> to host your hackathon
           </Step>
 
           <Step 
@@ -300,7 +300,7 @@ function App() {
             imageSrc="/ui/step-workshops.jpeg"
             imageAlt="Step 3"
           >
-            Find <span className="text-[#F77034] font-bold">sponsors</span> to buy merch and prizes, and make your event special
+            Find <span className="text-[#F77034] font-bold">SPONSORS</span> to buy merch and prizes, and make your event <span className="text-[#F77034] font-bold">SPECIAL!</span>
           </Step>
 
           <Step 
@@ -309,7 +309,7 @@ function App() {
             imageAlt="Step 4"
             isReversed={true}
           >
-            <span className="text-[#F77034] font-bold">Buy supplies</span>, order food, and prepare <span className="text-[#F77034] font-bold">workshops</span>
+            Buy supplies, order food, learn <span className="text-[#F77034] font-bold"> GAME DEV</span>, and teach <span className="text-[#F77034] font-bold">WORKSHOPS</span>
           </Step>
           
           <div className="flex justify-end mt-12">
