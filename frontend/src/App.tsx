@@ -314,12 +314,12 @@ function App() {
           
           <div className="flex justify-end mt-12">
             <button 
-              className="bg-[#E77232] rounded-[20px] px-12 py-6 transform rotate-[2deg] hover:scale-105 transition-transform shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95"
+              className="bg-[#E77232] rounded-[20px] px-16 py-8 transform rotate-[2deg] hover:scale-105 transition-transform shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95"
               type="button"
               onClick={() => window.open("https://docs.google.com/document/d/14sMLsvxpBFtdzNOvmMJyjIrggKdaXLJ2GMiOoBcE8-M/", "_blank")}
             >
               <p 
-                className="text-4xl md:text-5xl font-normal font-dream-planner"
+                className="text-5xl md:text-6xl font-normal font-dream-planner"
                 style={{ color: "rgba(255, 255, 255, 0.69)" }}
               >
                 FULL ORGANIZERS GUIDE
