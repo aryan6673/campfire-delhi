@@ -472,11 +472,11 @@ function App() {
             />
 
             <GameCard 
-              imageSrc="/games/macuahuitl.webp"
-              imageAlt="Macuahuitl"
-              title="Macuahuitl"
-              author="scoopish - Daydream Global"
-              href="https://scoopish.itch.io/macuahuitl"
+              imageSrc="/games/return-to-sender.webp"
+              imageAlt="Return to The Sender"
+              title="Return to The Sender"
+              author="i1rs7 - Daydream Global"
+              href="https://i1rs7.itch.io/return-to-the-sender"
             />
           </div>
           
