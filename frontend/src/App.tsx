@@ -341,20 +341,30 @@ function App() {
           <img src='/backgrounds/world-map-left.png' alt='' className='h-full hidden md:block' />
           <div className='flex items-center md:block md:relative'>
             <img src='/backgrounds/world-map-right.webp' alt='' className='h-full hidden md:block' />
-            <div className='md:absolute md:top-0 md:left-0 py-12 md:py-16 md:pb-0 rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.25)] md:rounded-none md:shadow-none md:pt-30 pl-6 md:pl-12 pr-6 md:pr-64 text-xl bg-[#EAD6BE] border-[#DCA87E] border-4 md:border-0 md:bg-transparent md:text-2xl flex flex-col gap-6 font-solway'>
-              <h1>Dear organizers,</h1>
+            <div className='md:absolute md:top-0 md:left-0 py-12 md:py-16 md:pb-0 rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.25)] md:rounded-none md:shadow-none md:pt-30 pl-6 md:pl-12 pr-6 md:pr-64 text-xl bg-[#EAD6BE] border-[#DCA87E] border-4 md:border-0 md:bg-transparent flex flex-col gap-6 font-solway'>
+              <h1>Dear hacker,</h1>
               <p>
-                Imagine making an event 
+                You can make a change: inspire someone to build a game for the first time, help someone
+                fall in love with computers, run an <i>incredible</i> game jam that you can invite all your
+                friends to. 
               </p>
 
-              <p><b>Make a game next February 7-8, 2026</b></p>
+              <p><b>This February, what if you organized a game jam in your city?</b></p>
 
               <p>
-                Maybe this is your first time. No problem - we have tons of online and in-person workshops for you to make your first game!
+                Hack Club will provide guides, funding, merch, and 1-on-1 mentorship. Our goal?
+                Run 200 game jams in 200 cities worldwide. All on the same day. All run by high
+                schoolers like us.
               </p>
 
               <p>
-                This winter, we invite you to learn something new, make something you're really proud of, meet new friends, and go on an incredible adventure together.
+                To kick off 2026, we’re so excited to invite you to Campfire. In just a couple
+                months, you will learn how to raise money for your event, buy food and drinks
+                for your attendees, and make your own video games with your friends!
+              </p>
+
+              <p>
+                Let’s go on an adventure together.
               </p>
 
               <p>
