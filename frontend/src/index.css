@@ -46,6 +46,7 @@ html, body, #root {
   --animate-fish-swim-1: fish-swim 64s linear infinite;
   --animate-fish-swim-2: fish-swim 70s linear infinite;
   --animate-cloud-float-right: float-left-right 20s ease-in-out alternate infinite;
+  --animate-float-up-down: float-up-down 2.5s ease-in-out infinite;
 
   @keyframes fish-swim {
     0%        { transform: translateX(0px) scaleX(1); }
@@ -57,5 +58,10 @@ html, body, #root {
   @keyframes float-left-right {
     0% { transform: translateX(-5vw); }
     100% { transform: translateX(0vw); }
+  }
+
+  @keyframes float-up-down {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
   }
 }

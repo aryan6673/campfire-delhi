@@ -317,7 +317,7 @@ function App() {
           
           <div className="flex justify-end mt-12">
             <button 
-              className="bg-[#E77232] rounded-[20px] px-16 py-8 transform rotate-[2deg] hover:scale-105 transition-transform shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95"
+              className="bg-[#E77232] rounded-[20px] px-16 py-8 transform rotate-[2deg] hover:scale-105 transition-transform shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95 animate-float-up-down"
               type="button"
               onClick={() => window.open("https://docs.google.com/document/d/14sMLsvxpBFtdzNOvmMJyjIrggKdaXLJ2GMiOoBcE8-M/", "_blank")}
             >
