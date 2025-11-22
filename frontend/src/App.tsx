@@ -94,7 +94,7 @@ function App() {
  
           <div className="absolute -bottom-[50px] left-0 w-full h-[120px] pointer-events-none">
             <img
-              src="/decorative/vines.png"
+              src="/decorative/vines.webp"
               alt=""
               className="w-full h-full object-cover object-top select-none"
             />
@@ -241,7 +241,7 @@ function App() {
       <section className="relative pt-[13vw] pb-96 bg-[url(/backgrounds/underwater-gradient.png)] bg-cover">
         <div className="absolute top-0 left-0 w-screen h-[200px] bg-gradient-to-b from-[#004b2a] to-transparent pointer-events-none"></div>
         <div className="absolute top-[30px] left-0 w-full scale-125 pointer-events-none z-50">
-          <img src="/decorative/vines.png" alt="" className="w-full h-full object-cover select-none" />
+          <img src="/decorative/vines.webp" alt="" className="w-full h-full object-cover select-none" />
         </div>
 
         <div className="absolute bottom-[30px] left-0 w-full h-[800px] z-0 pointer-events-none">
@@ -249,7 +249,7 @@ function App() {
         </div>
         
         <div className="absolute bottom-0 left-0 w-full h-[613px] z-0 pointer-events-none">
-          <img src="/backgrounds/seafloor.png" alt="" className="w-full h-full object-cover select-none" />
+          <img src="/backgrounds/seafloor.webp" alt="" className="w-full h-full object-cover select-none" />
         </div>
         
         <div className="absolute bottom-[200px] left-32 w-[569px] h-[676px] pointer-events-none">
@@ -403,7 +403,7 @@ function App() {
           
           <div className="flex flex-col md:flex-row gap-12 justify-between w-full items-center">
             <StoryCard 
-              imageSrc="/stories/counterspell.jpg"
+              imageSrc="/stories/counterspell.webp"
               imageAlt=""
               titleImageSrc="/branding/logo-counterspell.png"
               titleImageAlt="Counterspell logo"
