@@ -1,11 +1,12 @@
-import FaqQuestion from './components/FaqQuestion.js';
-import FaqButton from './components/FaqButton.js';
-import Step from './components/Step.js';
-import GameCard from './components/GameCard.js';
-import NavbarLink from './components/NavbarLink.tsx';
-import VideoEmbed from './components/VideoEmbed.tsx';
+import FaqQuestion from '../primitives/FaqQuestion.js';
+import FaqButton from '../primitives/FaqButton.js';
+import Step from '../primitives/Step.js';
+import GameCard from '../primitives/GameCard.js';
+import NavbarLink from '../primitives/NavbarLink.tsx';
+import VideoEmbed from '../primitives/VideoEmbed.tsx';
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
+import type { SatelliteContent } from '../../lib/satellite.ts';
 
 const FORM_URL_ORGANIZER_APPLICATION = "https://forms.hackclub.com/t/8L51MzWyrHus";
 const FORM_URL_RSVP = "https://forms.hackclub.com/t/a3QSt8MuvHus";
@@ -81,7 +82,8 @@ const CONTENT = {
     cards: [
       {
         sponsor: "Hack Club",
-        logo: "https://assets.hackclub.com/flag-standalone-wtransparent.svg"
+        logo: "https://assets.hackclub.com/flag-standalone-wtransparent.svg",
+        link: "https://hackclub.com"
       }
     ]
   },
@@ -153,7 +155,7 @@ const CONTENT = {
   }
 };
 
-function App() {
+function App({slug, content}: {slug: string | undefined, content: SatelliteContent}) {
   const [email, setEmail] = useState("");
   const [scrollY, setScrollY] = useState(document.body.scrollTop);
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1280);
@@ -201,12 +203,12 @@ function App() {
       <div className="w-full h-screen">
         <header className="relative h-[60px] md:h-[115px] bg-[#45b4f5] justify-end items-center content-center md:pr-16 hidden sm:flex">
           <nav className="flex gap-4 w-full justify-between px-8 md:px-0 text-2xl md:gap-12 items-center md:justify-end text-white md:text-3xl xl:text-5xl font-bold font-ember-and-fire">
-            <NavbarLink onClick={() => scrollToSection('steps')}>{CONTENT.nav.howToOrganize}</NavbarLink>
+            <NavbarLink onClick={() => scrollToSection('steps')}>{content.nav.howToOrganize}</NavbarLink>
             {/* <NavbarLink onClick={() => scrollToSection('map')}>Map</NavbarLink> */}
             {/* <NavbarLink onClick={() => scrollToSection('letter')}>Letter</NavbarLink> */}
-            <NavbarLink onClick={() => scrollToSection('schedule')}>{CONTENT.nav.schedule}</NavbarLink>
-            <NavbarLink onClick={() => scrollToSection('games-made')}>{CONTENT.nav.gamesMade}</NavbarLink>
-            <NavbarLink onClick={() => scrollToSection('faq')}>{CONTENT.nav.faq}</NavbarLink>
+            <NavbarLink onClick={() => scrollToSection('schedule')}>{content.nav.schedule}</NavbarLink>
+            <NavbarLink onClick={() => scrollToSection('games-made')}>{content.nav.gamesMade}</NavbarLink>
+            <NavbarLink onClick={() => scrollToSection('faq')}>{content.nav.faq}</NavbarLink>
           </nav>
         </header>
 
@@ -285,7 +287,7 @@ function App() {
                       textShadow: "5px 8px 0px rgba(0,0,0,0.25)"
                     }}
                   >
-                    {CONTENT.hero.title}
+                    {content.hero.title}
                   </h1>
                   <h3
                     className="text-[#fcf5ed] text-[40px] md:text-[50px] xl:text-[60px] font-normal leading-none mb-4 font-dream-planner text-right"
@@ -293,7 +295,7 @@ function App() {
                       textShadow: "5px 8px 0px rgba(0,0,0,0.25)"
                     }}
                   >
-                    {CONTENT.hero.city.toUpperCase()}
+                    {content.hero.city.toUpperCase()}
                   </h3>
                 </div>
 
@@ -304,7 +306,7 @@ function App() {
                       textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                     }}
                   >
-                    {CONTENT.hero.subtitle}
+                    {content.hero.subtitle}
                   </p>
                   <p
                     className="text-white text-4xl md:text-3xl xl:text-4xl font-bold font-ember-and-fire"
@@ -312,7 +314,7 @@ function App() {
                       textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                     }}
                   >
-                    {CONTENT.hero.date}
+                    {content.hero.date}
                   </p>
                 </div>
               </div>
@@ -333,8 +335,8 @@ function App() {
                       onChange={e => setEmail(e.target.value)}
                       type="email"
                       className="text-[#854d16] text-2xl md:text-4xl font-bold truncate bg-transparent border-none outline-none flex-1 cursor-text font-ember-and-fire"
-                      placeholder={CONTENT.hero.emailPlaceholder}
-                      defaultValue={CONTENT.hero.emailPlaceholder}
+                      placeholder={content.hero.emailPlaceholder}
+                      defaultValue={content.hero.emailPlaceholder}
                     />
                   </div>
 
@@ -346,7 +348,7 @@ function App() {
                     <p
                       className="text-[#8d3f34] text-3xl md:text-5xl font-normal font-dream-planner"
                     >
-                      {CONTENT.hero.ctaPrimary}
+                      {content.hero.ctaPrimary}
                     </p>
                   </button>
                 </div>
@@ -354,12 +356,12 @@ function App() {
                 <div className='font-ember-and-fire text-white text-4xl pl-2 -translate-y-1 md:rotate-[-1.2deg]' style={{
                   textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                 }}>
-                  {CONTENT.hero.ctaSecondaryPrefix}<span
+                  {content.hero.ctaSecondaryPrefix}<span
                     className='underline inline-block cursor-pointer transition-transform hover:scale-105 active:scale-95'
                     onClick={() => openWithEmail(FORM_URL_RSVP)}
                   >
-                    {CONTENT.hero.ctaSecondary}
-                  </span>{CONTENT.hero.ctaSecondarySuffix}
+                    {content.hero.ctaSecondary}
+                  </span>{content.hero.ctaSecondarySuffix}
                 </div>
               </div>
             </div>
@@ -431,7 +433,7 @@ function App() {
             imageSrc="/compressed/ui/step-signup.jpeg"
             imageAlt="Step 1"
           >
-            {CONTENT.steps.step1}<br></br><span className="font-bold text-[#F77034]">{CONTENT.steps.step1Highlight}</span>
+            {content.steps.step1}<br></br><span className="font-bold text-[#F77034]">{content.steps.step1Highlight}</span>
           </Step>
 
           <Step
@@ -440,7 +442,7 @@ function App() {
             imageAlt="Step 2"
             isReversed={true}
           >
-            {CONTENT.steps.step2}<span className="font-bold text-[#F77034]">{CONTENT.steps.step2Highlight}</span>{CONTENT.steps.step2Suffix}
+            {content.steps.step2}<span className="font-bold text-[#F77034]">{content.steps.step2Highlight}</span>{content.steps.step2Suffix}
           </Step>
 
           <Step
@@ -448,7 +450,7 @@ function App() {
             imageSrc="/compressed/ui/step-workshops.webp"
             imageAlt="Step 3"
           >
-            {CONTENT.steps.step3}<span className="text-[#F77034] font-bold">{CONTENT.steps.step3Highlight1}</span>{CONTENT.steps.step3Middle}<span className="text-[#F77034] font-bold">{CONTENT.steps.step3Highlight2}</span>
+            {content.steps.step3}<span className="text-[#F77034] font-bold">{content.steps.step3Highlight1}</span>{content.steps.step3Middle}<span className="text-[#F77034] font-bold">{content.steps.step3Highlight2}</span>
           </Step>
 
           <Step
@@ -457,7 +459,7 @@ function App() {
             imageAlt="Step 4"
             isReversed={true}
           >
-            {CONTENT.steps.step4}<span className="text-[#F77034] font-bold">{CONTENT.steps.step4Highlight1}</span>{CONTENT.steps.step4Middle}<span className="text-[#F77034] font-bold">{CONTENT.steps.step4Highlight2}</span>
+            {content.steps.step4}<span className="text-[#F77034] font-bold">{content.steps.step4Highlight1}</span>{content.steps.step4Middle}<span className="text-[#F77034] font-bold">{content.steps.step4Highlight2}</span>
           </Step>
 
           <div className="flex justify-end mt-12">
@@ -470,7 +472,7 @@ function App() {
                 className="text-5xl md:text-6xl font-normal font-dream-planner"
                 style={{ color: "rgba(255, 255, 255, 0.69)" }}
               >
-                {CONTENT.steps.guideButton}
+                {content.steps.guideButton}
               </p>
             </button>
           </div>
@@ -482,25 +484,25 @@ function App() {
           <img src="/decorative/clouds-3-symmetric.webp" alt="" className="w-full h-full select-none" />
         </div>
 
-        <div id="letter" className="relative w-full h-full z-50 translate-y-20 min-[1200px]:translate-y-64 flex justify-center">
+        <div id="letter" className="relative w-full h-full z-50 translate-y-8 min-[1200px]:translate-y-40 flex justify-center">
           <img src='/compressed/backgrounds/world-map-left.webp' alt='' className='h-full hidden min-[1200px]:block' />
           <div className='flex items-center min-[1200px]:block min-[1200px]:relative'>
             <img src='/backgrounds/world-map-right.webp' alt='' className='h-full hidden min-[1200px]:block' />
             <div className='min-[1200px]:absolute min-[1200px]:top-0 min-[1200px]:left-0 py-12 min-[1200px]:py-16 min-[1200px]:pb-0 rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.25)] min-[1200px]:rounded-none min-[1200px]:shadow-none min-[1200px]:pt-30 pl-6 min-[1200px]:pl-12 pr-6 min-[1200px]:pr-64 text-xl bg-[#EAD6BE] border-[#DCA87E] border-4 min-[1200px]:border-0 min-[1200px]:bg-transparent flex flex-col gap-6 font-solway'>
-              <h1>{CONTENT.letter.greeting}</h1>
-              <p>{CONTENT.letter.paragraph1}</p>
+              <h1>{content.letter.greeting}</h1>
+              <p>{content.letter.paragraph1}</p>
 
-              <p><b>{CONTENT.letter.paragraph2}</b></p>
+              <p><b>{content.letter.paragraph2}</b></p>
 
-              <p>{CONTENT.letter.paragraph3}</p>
+              <p>{content.letter.paragraph3}</p>
 
-              <p>{CONTENT.letter.paragraph4}</p>
+              <p>{content.letter.paragraph4}</p>
 
-              <p>{CONTENT.letter.paragraph5}</p>
+              <p>{content.letter.paragraph5}</p>
 
               <p>
-                {CONTENT.letter.closing} <br />
-                {CONTENT.letter.signature}
+                {content.letter.closing} <br />
+                {content.letter.signature}
               </p>
             </div>
           </div>
@@ -540,11 +542,11 @@ function App() {
             <h2
               className="text-[#FFD999] text-6xl md:text-7xl font-bold text-center mb-4 font-ember-and-fire relative z-10"
             >
-              {CONTENT.schedule.title}
+              {content.schedule.title}
             </h2>
 
             <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-8">
-              {CONTENT.schedule.days.map((day, dayIndex) => (
+              {content.schedule.days.map((day, dayIndex) => (
                 <div key={dayIndex}>
                   <h3 className="text-[#FFD999] text-2xl md:text-3xl font-bold font-ember-and-fire mb-4">
                     {day.date}
@@ -584,28 +586,28 @@ function App() {
               textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
             }}
           >
-            {CONTENT.sponsors.title}
+            {content.sponsors.title}
           </h2>
 
           <div className="flex flex-wrap gap-8 justify-center">
             {
-              CONTENT.sponsors.cards.map((sponsor, index) => (
+              content.sponsors.cards.map((sponsor, index) => (
                 <>
-                  <div key={index} className='flex flex-col justify-center items-center bg-white/10 rounded-xl p-4'>
+                  <a key={index} href={sponsor.link} target="_blank" className='flex flex-col justify-center items-center bg-white/10 rounded-xl p-4 hover:bg-white/15 transition-all'>
                     <img
                       src={sponsor.logo}
                       alt={sponsor.sponsor}
                       className="w-40 m-4 object-cover select-none"
                     />
                     <p className="text-white text-lg md:text-xl font-solway">{sponsor.sponsor}</p>
-                  </div>
+                  </a>
                 </>
               ))
             }
           </div>
 
           {
-            CONTENT.signatures ?
+            content.signatures ?
               (
                 <div>
                   <h2
@@ -615,12 +617,12 @@ function App() {
                       textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                     }}
                   >
-                    {CONTENT.signatures.title}
+                    {content.signatures.title}
                   </h2>
 
                   <img
-                    src={CONTENT.signatures.img}
-                    alt={CONTENT.signatures.title}
+                    src={content.signatures.img}
+                    alt={content.signatures.title}
                     className="w-[60%] object-cover select-none"
                   />
                 </div>)
@@ -628,7 +630,7 @@ function App() {
           }
         </div>
         
-        <div className="scale-250 translate-y-64 pb-48 md:pb-0 md:translate-y-0 md:scale-105 left-0 w-full pointer-events-none">
+        <div className="scale-250 translate-y-80 pb-48 md:pb-0 md:translate-y-0 md:scale-105 left-0 w-full pointer-events-none">
           <img
             src="/decorative/puzzle-cloud-bottom.webp"
             alt=""
@@ -654,7 +656,7 @@ function App() {
               textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
             }}
           >
-            {CONTENT.faq.title}
+            {content.faq.title}
           </h2>
 
           <div className="flex flex-col md:flex-row gap-32 md:gap-10 justify-center items-center md:items-start">
@@ -672,15 +674,15 @@ function App() {
                     textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                   }}
                 >
-                  {CONTENT.faq.participant.title}
+                  {content.faq.participant.title}
                 </p>
 
-                {CONTENT.faq.participant.questions.map((q, i) => (
+                {content.faq.participant.questions.map((q, i) => (
                   <FaqQuestion key={i} question={q.question}>
                     {q.answer}
                   </FaqQuestion>
                 ))}
-                <FaqButton content={CONTENT.faq.participant.buttonText} />
+                <FaqButton content={content.faq.participant.buttonText} />
               </div>
             </div>
 
@@ -698,15 +700,15 @@ function App() {
                     textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                   }}
                 >
-                  {CONTENT.faq.organizer.title}
+                  {content.faq.organizer.title}
                 </p>
 
-                {CONTENT.faq.organizer.questions.map((q, i) => (
+                {content.faq.organizer.questions.map((q, i) => (
                   <FaqQuestion key={i} question={q.question}>
                     {q.answer}
                   </FaqQuestion>
                 ))}
-                <FaqButton href={FORM_URL_ORGANIZER_APPLICATION} content={CONTENT.faq.organizer.buttonText} />
+                <FaqButton href={FORM_URL_ORGANIZER_APPLICATION} content={content.faq.organizer.buttonText} />
               </div>
             </div>
           </div>
@@ -727,7 +729,7 @@ function App() {
               textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
             }}
           >
-            {CONTENT.footer.tagline}
+            {content.footer.tagline}
           </p>
 
           <div className="mt-8 flex flex-col md:flex-row gap-16 max-w-6xl mx-auto px-4">
@@ -738,16 +740,16 @@ function App() {
               <a href="https://hackclub.com/conduct/" target="_blank" className="hover:underline">Code of Conduct</a>
 
               <p className="text-white text-sm md:text-md text-right max-w-96 font-ember-and-fire">
-                {CONTENT.footer.copyright}
+                {content.footer.copyright}
               </p>
             </div>
 
             <div className="flex-1 text-left">
               <p className="text-white text-lg md:text-xl font-ember-and-fire leading-relaxed mb-4">
-                {CONTENT.footer.description}<a href="https://summer.hackclub.com/" target="_blank" className="underline hover:text-gray-300">Summer of Making</a>, hosted the <a href="https://github.com/hackclub/the-hacker-zephyr" target="_blank" className="underline hover:text-gray-300">world's longest hackathon on land</a>, and ran <a href="https://www.youtube.com/watch?v=QvCoISXfcE8" target="_blank" className="underline hover:text-gray-300">Canada's largest high school hackathon</a>.
+                {content.footer.description}<a href="https://summer.hackclub.com/" target="_blank" className="underline hover:text-gray-300">Summer of Making</a>, hosted the <a href="https://github.com/hackclub/the-hacker-zephyr" target="_blank" className="underline hover:text-gray-300">world's longest hackathon on land</a>, and ran <a href="https://www.youtube.com/watch?v=QvCoISXfcE8" target="_blank" className="underline hover:text-gray-300">Canada's largest high school hackathon</a>.
               </p>
               <p className="text-white text-lg md:text-xl font-ember-and-fire font-bold">
-                {CONTENT.footer.closing}
+                {content.footer.closing}
               </p>
             </div>
           </div>
