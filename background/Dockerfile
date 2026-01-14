@@ -14,4 +14,4 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN bunx prisma generate
 
-CMD ["bun", "run", "src/index.ts"]
+CMD ["bun", "run", "start"]
