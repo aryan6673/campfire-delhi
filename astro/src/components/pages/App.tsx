@@ -5,9 +5,11 @@ import Step from '../primitives/Step.js';
 import StoryCard from '../primitives/StoryCard.js';
 import GameCard from '../primitives/GameCard.js';
 import NavbarLink from '../primitives/NavbarLink.tsx';
-import VideoEmbed from '../primitives/VideoEmbed.tsx';
+import MapEmbed from '../primitives/MapEmbed.tsx';
+import { Map } from '../primitives/Map.tsx';
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
+import type { EventLocation } from '../../lib/events.ts';
 
 const FORM_URL_ORGANIZER_APPLICATION = "https://forms.hackclub.com/t/8L51MzWyrHus";
 const FORM_URL_RSVP = "https://forms.hackclub.com/t/a3QSt8MuvHus";
@@ -49,12 +51,13 @@ function FlagshipCTA({ className, compact, maxWidth }: { className?: string; com
   );
 }
 
-function App() {
+function App({ events }: { events: EventLocation[] }) {
   const [email, setEmail] = useState("");
   const [scrollY, setScrollY] = useState(document.body.scrollTop);
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1280);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isMapOpen, setIsMapOpen] = useState(false);
   const emailRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -111,7 +114,7 @@ function App() {
         />
       </div>
 
-      <div className="w-full h-screen">
+      <div className={clsx("w-full relative", windowHeight > windowWidth && windowWidth < 860 ? "h-full" : "h-screen")}>
         <header className="relative h-[60px] md:h-[115px] bg-[#45b4f5] justify-end items-center content-center md:pr-16 hidden sm:flex">
           <nav className="flex gap-4 w-full justify-between px-8 md:px-0 text-2xl md:gap-12 items-center md:justify-end text-white md:text-3xl xl:text-5xl font-bold font-ember-and-fire">
             <NavbarLink onClick={() => scrollToSection('steps')}>How to organize</NavbarLink>
@@ -124,8 +127,8 @@ function App() {
         </header>
 
         <section className={clsx(
-            "relative h-full px-6 md:px-16 md:px-24 2xl:px-32 bg-[url(/backgrounds/blue-sky.webp)] bg-center bg-cover",
-            windowHeight > windowWidth && windowWidth < 860 ? "flex items-stretch pb-16" : "flex items-end pb-32 2xl:pb-48"
+            "relative px-6 md:px-16 md:px-24 2xl:px-32 bg-[url(/backgrounds/blue-sky.webp)] bg-center bg-cover",
+            windowHeight > windowWidth && windowWidth < 860 ? "flex items-stretch pb-0" : "h-full flex items-end pb-32 2xl:pb-48"
           )}>
           <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
             <img src="/backgrounds/sky-shine.webp" alt="" className="w-full h-full object-cover select-none" />
@@ -159,21 +162,24 @@ function App() {
             />
           </div>
  
-          <div className="absolute -bottom-[50px] left-0 w-full h-[120px] pointer-events-none">
+          {/* <div className="absolute -bottom-[50px] left-0 w-full h-[120px] pointer-events-none">
             <img
               src="/decorative/vines.webp"
               alt=""
               className="w-full h-full object-cover object-top select-none"
             />
-          </div>
+          </div> */}
           
-          <div className="flex flex-col md:flex-row justify-between items-center md:items-start xl:items-center w-full gap-8 pb-16 z-30 h-full pt-16 md:pt-0 md:h-auto">
+          <div className={clsx(
+            "flex flex-col md:flex-row justify-between items-center md:items-start xl:items-center w-full gap-8 z-30 pt-16 md:pt-0",
+            windowHeight > windowWidth && windowWidth < 860 ? "pb-32" : "pb-16 h-full md:h-auto"
+          )}>
             <div className={clsx(
               "flex flex-col gap-4 w-full md:w-[648px]",
               windowHeight > windowWidth && windowWidth < 860 && "justify-between h-full"
             )}>
               <div className="mb-6">
-                {windowWidth >= 400 && <FlagshipCTA className="min-[860px]:hidden -mt-12 mb-8" compact={windowWidth < 500} />}
+                {/* {windowWidth >= 400 && <FlagshipCTA className="min-[860px]:hidden -mt-12 mb-8" compact={windowWidth < 500} />} */}
 
                 <div className="flex items-center gap-3 mb-4 relative z-30">
                   <a href='https://hackclub.com' className='transition-transform hover:scale-105 active:scale-95'>
@@ -280,7 +286,7 @@ function App() {
               </div>
             </div>
 
-            <VideoEmbed className="hidden xl:block self-end mb-8" />
+            <MapEmbed className="hidden xl:block self-end mb-8 relative z-50" onOpenMap={() => setIsMapOpen(true)} />
           </div>
         </section>
 
@@ -297,8 +303,8 @@ function App() {
       </div>
 
       <section className="relative pb-96 bg-[url(/backgrounds/underwater-gradient.webp)] bg-cover bg-top">
-        <div className="xl:hidden pt-16 pb-8 relative z-10">
-          <VideoEmbed className="px-6" />
+        <div className="xl:hidden pt-16 pb-8 relative z-50">
+          <MapEmbed className="px-6 relative z-50 max-w-sm mx-auto" onOpenMap={() => setIsMapOpen(true)} />
         </div>
         <div className="pt-[8vw] xl:pt-[13vw]"></div>
         <div className="absolute top-0 left-0 w-screen h-[200px] bg-gradient-to-b from-[#004b2a] to-transparent pointer-events-none"></div>
@@ -709,6 +715,29 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {isMapOpen && (
+        <div 
+          className="fixed inset-0 bg-black/80 z-[9999] flex items-center justify-center p-4"
+          onClick={() => setIsMapOpen(false)}
+        >
+          <div 
+            className="relative w-[90vw] h-[80vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setIsMapOpen(false)}
+              className="absolute -top-10 right-0 text-white text-3xl font-bold hover:opacity-70 cursor-pointer"
+            >
+              ✕
+            </button>
+            <Map 
+              events={events} 
+              className="w-full h-full rounded-2xl"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
