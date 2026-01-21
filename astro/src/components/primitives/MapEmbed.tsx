@@ -1,25 +1,26 @@
 interface MapEmbedProps {
   className?: string;
+  label?: string;
   onOpenMap: () => void;
 }
 
-function MapEmbed({ className, onOpenMap }: MapEmbedProps) {
+function MapEmbed({ className, onOpenMap, label = "find an event near you" }: MapEmbedProps) {
   return (
     <div className={className}>
-      <div className="flex items-center justify-center gap-3 mb-4 2xl:mb-8">
+      <div className="relative mt-16 md:mt-0 mb-2 md:mb-10 2xl:mb-12">
         <p 
-          className="text-white text-3xl 2xl:text-5xl font-bold font-ember-and-fire"
+          className="text-white text-4xl 2xl:text-5xl font-bold font-ember-and-fire text-center"
           style={{ 
             textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
           }}
         >
-          find an event near you
+          {label}
         </p>
 
         <img 
           src="/compressed/ui/arrow.webp" 
           alt="" 
-          className="w-[45px] md:w-[55px] h-[33px] md:h-[41px] translate-y-6 rotate-[6.2deg] z-50 select-none"
+          className="hidden md:block absolute right-0 top-full w-[55px] h-[41px] rotate-[6.2deg] z-50 select-none"
         />
       </div>
 
