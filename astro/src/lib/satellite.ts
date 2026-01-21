@@ -170,6 +170,7 @@ export async function getSatelliteData(slug: string) {
 // }
 
 export type SatelliteContent = {
+    error?: string;
     localization: {
         hero: {
             campfire: string;

@@ -7,9 +7,10 @@ const FORM_URL_SIGN_UP = "https://forms.hackclub.com/campfire-signup";
 interface UnderConstructionProps {
     event_name: string;
     record_id?: string;
+    error?: string;
 }
 
-function UnderConstruction({ event_name, record_id }: UnderConstructionProps) {
+function UnderConstruction({ event_name, record_id, error = "" }: UnderConstructionProps) {
     const [email, setEmail] = useState("");
     const emailRef = useRef<HTMLInputElement>(null);
 
@@ -86,7 +87,7 @@ function UnderConstruction({ event_name, record_id }: UnderConstructionProps) {
                                         textShadow: "5px 8px 0px rgba(0,0,0,0.25)"
                                     }}
                                 >
-                                    {event_name.toUpperCase()}
+                                    {event_name.toUpperCase().replaceAll("-", " ").replace("CAMPFIRE", "")}
                                 </h3>
                             </div>
                         </div>
@@ -98,7 +99,13 @@ function UnderConstruction({ event_name, record_id }: UnderConstructionProps) {
                                     textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                                 }}
                             >
-                                This event is confirmed, but we’re still finalizing the exact schedule! The site will be live in 3-4 business days
+                                {
+                                    error ? (
+                                        <>
+                                        This site is temporarily down! <br /> (Organizers: {error})
+                                        </>
+                                    ) : "This event is confirmed, but we’re still finalizing the exact schedule! The site will be live in 3-4 business days"
+                                }
                             </p>
                             <p
                                 className="text-white text-4xl md:text-3xl xl:text-4xl font-bold font-ember-and-fire text-center"

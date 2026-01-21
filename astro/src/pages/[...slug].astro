@@ -50,7 +50,7 @@ const satelliteData = await getSatelliteData(slug);
 
   </head>
   <body>
-    {!satelliteData?.active && <UnderConstruction client:only="react" event_name={slug} record_id={satelliteData?.recordId} />}
+    {(!satelliteData?.active || (satelliteData.data as SatelliteContent).error) && <UnderConstruction client:only="react" event_name={slug} record_id={satelliteData?.recordId} error={(satelliteData?.data as SatelliteContent)?.error || ""} />}
     {satelliteData?.active && <Satellite client:only="react" slug={slug} content={satelliteData.data as SatelliteContent} />}
   </body>
 </html>

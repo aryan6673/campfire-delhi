@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import Airtable from 'airtable';
 import { prisma } from './prisma';
+import { error } from 'node:console';
 
 Airtable.configure({
     apiKey: process.env.AIRTABLE_API_KEY,
@@ -22,6 +23,8 @@ export async function listOfEventWebsiteData() {
 }
 
 const POLL_INTERVAL = parseInt(process.env.AIRTABLE_POLL_INTERVAL || '300000', 10);
+
+const VERSION = 2;
 
 class AirtableSyncWorker {
     private intervalId: NodeJS.Timeout | null = null;
@@ -48,9 +51,16 @@ class AirtableSyncWorker {
                 let data: any;
                 try {
                     data = websiteJson ? JSON.parse(websiteJson) : {};
+                    if (websiteActive && data.version !== VERSION) {
+                        data = {
+                            error: "Your JSON is outdated. Please update it!"
+                        }
+                    }
                 } catch (error) {
                     console.error(`Error parsing JSON for slug ${slug}:`, error);
-                    data = {};
+                    data = {
+                        error: "Error parsing JSON. Make sure the JSON is valid!"
+                    };
                 }
 
                 await prisma.satellite.upsert({
