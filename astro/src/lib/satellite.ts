@@ -259,7 +259,7 @@ export type SatelliteContent = {
                 }[];
                 buttonText: string;
             };
-            organizer: {
+            organizer?: {
                 title: string;
                 questions: {
                     question: string;

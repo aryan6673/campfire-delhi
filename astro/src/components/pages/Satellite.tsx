@@ -709,31 +709,33 @@ function App({slug, content}: {slug: string | undefined, content: SatelliteConte
               </div>
             </div>
 
-            <div className="relative w-full md:w-auto">
-              <div className="absolute inset-0 md:w-[608px] pointer-events-none flex flex-col min-h-[105%]">
-                <img src="/ui/woodboard-2-top.svg" alt="" className="w-full flex-shrink-0 select-none" />
-                <div className="bg-[#AD684F] flex-1 w-full"></div>
-                <img src="/ui/woodboard-2-bottom.svg" alt="" className="w-full flex-shrink-0 select-none" />
-              </div>
+            {content.event.faq.organizer && (
+              <div className="relative w-full md:w-auto">
+                <div className="absolute inset-0 md:w-[608px] pointer-events-none flex flex-col min-h-[105%]">
+                  <img src="/ui/woodboard-2-top.svg" alt="" className="w-full flex-shrink-0 select-none" />
+                  <div className="bg-[#AD684F] flex-1 w-full"></div>
+                  <img src="/ui/woodboard-2-bottom.svg" alt="" className="w-full flex-shrink-0 select-none" />
+                </div>
 
-              <div className="relative z-10 flex flex-col gap-10 items-center px-4 md:px-16 pt-9 w-full md:w-[608px]">
-                <p
-                  className="text-[#d7cfeb] text-6xl font-bold text-center mb-4 font-ember-and-fire"
-                  style={{
-                    textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
-                  }}
-                >
-                  {content.event.faq.organizer.title}
-                </p>
+                <div className="relative z-10 flex flex-col gap-10 items-center px-4 md:px-16 pt-9 w-full md:w-[608px]">
+                  <p
+                    className="text-[#d7cfeb] text-6xl font-bold text-center mb-4 font-ember-and-fire"
+                    style={{
+                      textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
+                    }}
+                  >
+                    {content.event.faq.organizer.title}
+                  </p>
 
-                {content.event.faq.organizer.questions.map((q, i) => (
-                  <FaqQuestion key={i} question={q.question}>
-                    {q.answer}
-                  </FaqQuestion>
-                ))}
-                <FaqButton href={FORM_URL_ORGANIZER_APPLICATION} content={content.event.faq.organizer.buttonText} />
+                  {content.event.faq.organizer.questions.map((q, i) => (
+                    <FaqQuestion key={i} question={q.question}>
+                      {q.answer}
+                    </FaqQuestion>
+                  ))}
+                  <FaqButton href={FORM_URL_ORGANIZER_APPLICATION} content={content.event.faq.organizer.buttonText} />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
