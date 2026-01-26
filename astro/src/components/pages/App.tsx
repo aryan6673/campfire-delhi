@@ -9,7 +9,9 @@ import MapEmbed from '../primitives/MapEmbed.tsx';
 import { Map } from '../primitives/Map.tsx';
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import type { EventLocation } from '../../lib/events.ts';
+import type { EventLocation } from '../../lib/airtable.ts';
+import EmailInput from '../primitives/EmailInput.tsx';
+import { openWithEmail } from '../../lib/email.ts';
 
 const FORM_URL_ORGANIZER_APPLICATION = "https://forms.hackclub.com/t/8L51MzWyrHus";
 const FORM_URL_RSVP = "https://forms.hackclub.com/t/a3QSt8MuvHus";
@@ -97,12 +99,7 @@ function App({ events }: { events: EventLocation[] }) {
     }
   };
 
-  function openWithEmail(url: string) {
-    if (!emailRef?.current?.reportValidity() || !email)
-      return;
-
-    window.open(`${url}?email=${encodeURIComponent(email)}`, "_blank");
-  }
+  const handleOpenWithEmail = (url: string) => openWithEmail(email, url, emailRef, undefined, 'main');
 
   return (
     <div className="w-full min-h-screen flex flex-col overflow-x-hidden">
@@ -245,22 +242,19 @@ function App({ events }: { events: EventLocation[] }) {
                     )}
                   >
                     <img src="/icons/email.svg" alt="" className="w-6 h-5 flex-shrink-0 select-none" />
-                    <input
-                      required
+                    <EmailInput
                       ref={emailRef}
                       value={email}
                       onChange={e => setEmail(e.target.value)}
-                      type="email"
-                      className="text-[#854d16] text-2xl md:text-4xl font-bold truncate bg-transparent border-none outline-none flex-1 cursor-text font-ember-and-fire"
                       placeholder="you@hackclub.com"
-                      defaultValue="you@hackclub.com"
+                      onSubmit={() => handleOpenWithEmail(FORM_URL_SIGN_UP)}
                     />
                   </div>
                   
                   <button 
                     className="bg-[#fca147] border-[5px] border-[rgba(0,0,0,0.2)] rounded-[20px] px-8 md:px-14 py-4 hover:scale-105 transition-transform w-full md:w-auto transform md:rotate-[1.5deg] shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95"
                     type="button"
-                    onClick={() => openWithEmail(FORM_URL_SIGN_UP)}
+                    onClick={() => handleOpenWithEmail(FORM_URL_SIGN_UP)}
                   >
                     <p 
                       className="text-[#8d3f34] text-3xl md:text-5xl font-normal font-dream-planner whitespace-nowrap"
@@ -278,7 +272,7 @@ function App({ events }: { events: EventLocation[] }) {
                     href='https://flagship.hackclub.com?utm_source=campfire-website'
                   >flagship</a> event?<br />...or <span
                     className='underline inline-block cursor-pointer transition-transform hover:scale-105 active:scale-95'
-                    onClick={() => openWithEmail(FORM_URL_ORGANIZER_APPLICATION)}
+                    onClick={() => handleOpenWithEmail(FORM_URL_ORGANIZER_APPLICATION)}
                   >
                     organize
                   </span> your own event!

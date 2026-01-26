@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { EventLocation } from '../../lib/events';
+import type { EventLocation } from '../../lib/airtable';
 import '../../styles/map.css';
 
 interface MapProps {

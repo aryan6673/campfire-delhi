@@ -7,6 +7,8 @@ import MapEmbed from '../primitives/MapEmbed.tsx';
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import type { SatelliteContent } from '../../lib/satellite.ts';
+import EmailInput from '../primitives/EmailInput.tsx';
+import { openWithEmail } from '../../lib/email.ts';
 
 function FormattedText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|__[^_]+__)/g);
@@ -60,12 +62,7 @@ function App({slug, content, record_id}: {slug: string | undefined, content: Sat
     }
   };
 
-  function openWithEmail(url: string) {
-    if (!emailRef?.current?.reportValidity() || !email)
-      return;
-
-    window.open(`${url}?email=${encodeURIComponent(email)}&event=${encodeURIComponent(record_id || "")}`, "_blank");
-  }
+  const handleOpenWithEmail = (url: string) => openWithEmail(email, url, emailRef, record_id, `satellite-${content.event.city}`);
 
   return (
     <div className="w-full flex flex-col overflow-x-hidden">
@@ -216,21 +213,19 @@ function App({slug, content, record_id}: {slug: string | undefined, content: Sat
                     )}
                   >
                     <img src="/icons/email.svg" alt="" className="w-6 h-5 flex-shrink-0 select-none" />
-                    <input
-                      required
+                    <EmailInput
                       ref={emailRef}
                       value={email}
                       onChange={e => setEmail(e.target.value)}
-                      type="email"
-                      className="text-[#854d16] text-2xl md:text-4xl font-bold truncate bg-transparent border-none outline-none flex-1 cursor-text font-ember-and-fire"
                       placeholder={content.localization.hero.emailPlaceholder}
+                      onSubmit={() => handleOpenWithEmail(FORM_URL_SIGN_UP)}
                     />
                   </div>
 
                   <button 
                     className="bg-[#fca147] border-[5px] border-[rgba(0,0,0,0.2)] rounded-[20px] px-8 md:px-14 py-4 hover:scale-105 transition-transform w-full md:w-auto transform md:rotate-[1.5deg] shadow-[0_8px_20px_rgba(0,0,0,0.25)] cursor-pointer active:scale-95"
                     type="button"
-                    onClick={() => openWithEmail(FORM_URL_SIGN_UP)}
+                    onClick={() => handleOpenWithEmail(FORM_URL_SIGN_UP)}
                   >
                     <p 
                       className="text-[#8d3f34] text-3xl md:text-5xl font-normal font-dream-planner whitespace-nowrap"

@@ -78,3 +78,18 @@ export function calculateDistance(lat1: number, lng1: number, lat2: number, lng2
 	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	return R * c; // Distance in miles
 }
+
+// email capturing
+export function sendEmailCapture(email: string, source: string) {
+	if (!airtableBase) {
+		console.warn('[Email Capture] Airtable not configured, skipping capture');
+		return;
+	}
+	
+	airtableBase('captured_emails').create({
+		"email": email,
+		"source": source
+	}).catch((err: Error) => {
+		console.error('[Email Capture] Failed to save email:', err.message);
+	});
+}
