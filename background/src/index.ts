@@ -63,23 +63,26 @@ class AirtableSyncWorker {
                     };
                 }
 
-                await prisma.satellite.upsert({
-                    where: { recordId: record.id },
-                    update: {
-                        slug,
-                        data,
-                        active: websiteActive,
-                        updatedAt: new Date(),
-                    },
-                    create: {
-                        recordId: record.id,
-                        slug,
-                        data,
-                        active: websiteActive,
-                    },
-                });
-
-                console.log(`✓ Synced: ${slug} - Active: ${websiteActive}`);
+                try {
+                    await prisma.satellite.upsert({
+                        where: { recordId: record.id },
+                        update: {
+                            slug,
+                            data,
+                            active: websiteActive,
+                            updatedAt: new Date(),
+                        },
+                        create: {
+                            recordId: record.id,
+                            slug,
+                            data,
+                            active: websiteActive,
+                        },
+                    });
+                    console.log(`✓ Synced: ${slug} - Active: ${websiteActive}`);
+                } catch (upsertError) {
+                    console.error(`Failed to upsert record ${record.id} (slug: ${slug}):`, upsertError);
+                }
             }
 
             const inactiveCount = await prisma.satellite.updateMany({
