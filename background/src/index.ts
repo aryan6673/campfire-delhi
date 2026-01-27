@@ -92,8 +92,21 @@ class AirtableSyncWorker {
                         },
                     });
                     console.log(`✓ Synced: ${slug} - Active: ${websiteActive}`);
-                } catch (upsertError) {
-                    console.error(`Failed to upsert record ${record.id} (slug: ${slug}):`, upsertError);
+                } catch (upsertError: any) {
+                    if (upsertError?.code === 'P2002') {
+                        const field = upsertError.meta?.target?.[0] || 'unknown';
+                        const existing = await prisma.satellite.findFirst({
+                            where: field === 'slug' ? { slug } : { recordId: record.id },
+                        });
+                        console.error(
+                            `Unique constraint violation on "${field}" for record ${record.id} (slug: ${slug}).`,
+                            existing
+                                ? `Conflicting record: id=${existing.id}, recordId=${existing.recordId}, slug=${existing.slug}`
+                                : 'Could not find conflicting record.'
+                        );
+                    } else {
+                        console.error(`Failed to upsert record ${record.id} (slug: ${slug}):`, upsertError);
+                    }
                 }
             }
 
