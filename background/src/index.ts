@@ -38,6 +38,44 @@ class AirtableSyncWorker {
 
             console.log(`Fetched ${records.length} active events from Airtable`);
 
+            // Delete records not in Airtable first to free up slugs
+            const deleteResult = await prisma.satellite.deleteMany({
+                where: {
+                    recordId: {
+                        notIn: records.map(r => r.id),
+                    },
+                },
+            });
+            if (deleteResult.count > 0) {
+                console.log(`Deleted ${deleteResult.count} records no longer in Airtable`);
+            }
+
+            // Build a map of recordId -> desired slug for conflict resolution
+            const recordSlugMap = new Map<string, string>();
+            for (const record of records) {
+                const slug = record.get('slug') as string;
+                if (slug) {
+                    recordSlugMap.set(record.id, slug);
+                }
+            }
+
+            // Clear slugs that would conflict (set to recordId temporarily)
+            for (const [recordId, desiredSlug] of recordSlugMap) {
+                const conflicting = await prisma.satellite.findFirst({
+                    where: {
+                        slug: desiredSlug,
+                        recordId: { not: recordId },
+                    },
+                });
+                if (conflicting) {
+                    await prisma.satellite.update({
+                        where: { id: conflicting.id },
+                        data: { slug: `__temp__${conflicting.recordId}` },
+                    });
+                    console.log(`Temporarily renamed slug for record ${conflicting.recordId} to resolve conflict`);
+                }
+            }
+
             for (const record of records) {
                 const slug = record.get('slug') as string;
                 const websiteJson = record.get('website_json') as string;
@@ -83,22 +121,6 @@ class AirtableSyncWorker {
                 } catch (upsertError) {
                     console.error(`Failed to upsert record ${record.id} (slug: ${slug}):`, upsertError);
                 }
-            }
-
-            const inactiveCount = await prisma.satellite.updateMany({
-                where: {
-                    recordId: {
-                        notIn: records.map(r => r.id),
-                    },
-                    active: true,
-                },
-                data: {
-                    active: false,
-                },
-            });
-
-            if (inactiveCount.count > 0) {
-                console.log(`Marked ${inactiveCount.count} events as inactive`);
             }
 
             console.log(`[${new Date().toISOString()}] Sync completed successfully`);
