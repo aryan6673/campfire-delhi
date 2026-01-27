@@ -50,32 +50,6 @@ class AirtableSyncWorker {
                 console.log(`Deleted ${deleteResult.count} records no longer in Airtable`);
             }
 
-            // Build a map of recordId -> desired slug for conflict resolution
-            const recordSlugMap = new Map<string, string>();
-            for (const record of records) {
-                const slug = record.get('slug') as string;
-                if (slug) {
-                    recordSlugMap.set(record.id, slug);
-                }
-            }
-
-            // Clear slugs that would conflict (set to recordId temporarily)
-            for (const [recordId, desiredSlug] of recordSlugMap) {
-                const conflicting = await prisma.satellite.findFirst({
-                    where: {
-                        slug: desiredSlug,
-                        recordId: { not: recordId },
-                    },
-                });
-                if (conflicting) {
-                    await prisma.satellite.update({
-                        where: { id: conflicting.id },
-                        data: { slug: `__temp__${conflicting.recordId}` },
-                    });
-                    console.log(`Temporarily renamed slug for record ${conflicting.recordId} to resolve conflict`);
-                }
-            }
-
             for (const record of records) {
                 const slug = record.get('slug') as string;
                 const websiteJson = record.get('website_json') as string;
