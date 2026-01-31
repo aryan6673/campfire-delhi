@@ -38,6 +38,7 @@ export type SatelliteMinAggregateOutputType = {
   id: number | null
   recordId: string | null
   slug: string | null
+  redirect: string | null
   active: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -47,6 +48,7 @@ export type SatelliteMaxAggregateOutputType = {
   id: number | null
   recordId: string | null
   slug: string | null
+  redirect: string | null
   active: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -56,6 +58,7 @@ export type SatelliteCountAggregateOutputType = {
   id: number
   recordId: number
   slug: number
+  redirect: number
   data: number
   active: number
   createdAt: number
@@ -76,6 +79,7 @@ export type SatelliteMinAggregateInputType = {
   id?: true
   recordId?: true
   slug?: true
+  redirect?: true
   active?: true
   createdAt?: true
   updatedAt?: true
@@ -85,6 +89,7 @@ export type SatelliteMaxAggregateInputType = {
   id?: true
   recordId?: true
   slug?: true
+  redirect?: true
   active?: true
   createdAt?: true
   updatedAt?: true
@@ -94,6 +99,7 @@ export type SatelliteCountAggregateInputType = {
   id?: true
   recordId?: true
   slug?: true
+  redirect?: true
   data?: true
   active?: true
   createdAt?: true
@@ -191,6 +197,7 @@ export type SatelliteGroupByOutputType = {
   id: number
   recordId: string
   slug: string
+  redirect: string | null
   data: runtime.JsonValue
   active: boolean
   createdAt: Date
@@ -224,6 +231,7 @@ export type SatelliteWhereInput = {
   id?: Prisma.IntFilter<"Satellite"> | number
   recordId?: Prisma.StringFilter<"Satellite"> | string
   slug?: Prisma.StringFilter<"Satellite"> | string
+  redirect?: Prisma.StringNullableFilter<"Satellite"> | string | null
   data?: Prisma.JsonFilter<"Satellite">
   active?: Prisma.BoolFilter<"Satellite"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Satellite"> | Date | string
@@ -234,6 +242,7 @@ export type SatelliteOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   recordId?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  redirect?: Prisma.SortOrderInput | Prisma.SortOrder
   data?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -247,6 +256,7 @@ export type SatelliteWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SatelliteWhereInput | Prisma.SatelliteWhereInput[]
   OR?: Prisma.SatelliteWhereInput[]
   NOT?: Prisma.SatelliteWhereInput | Prisma.SatelliteWhereInput[]
+  redirect?: Prisma.StringNullableFilter<"Satellite"> | string | null
   data?: Prisma.JsonFilter<"Satellite">
   active?: Prisma.BoolFilter<"Satellite"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Satellite"> | Date | string
@@ -257,6 +267,7 @@ export type SatelliteOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   recordId?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  redirect?: Prisma.SortOrderInput | Prisma.SortOrder
   data?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -275,6 +286,7 @@ export type SatelliteScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Satellite"> | number
   recordId?: Prisma.StringWithAggregatesFilter<"Satellite"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Satellite"> | string
+  redirect?: Prisma.StringNullableWithAggregatesFilter<"Satellite"> | string | null
   data?: Prisma.JsonWithAggregatesFilter<"Satellite">
   active?: Prisma.BoolWithAggregatesFilter<"Satellite"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Satellite"> | Date | string
@@ -284,6 +296,7 @@ export type SatelliteScalarWhereWithAggregatesInput = {
 export type SatelliteCreateInput = {
   recordId: string
   slug: string
+  redirect?: string | null
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   active?: boolean
   createdAt?: Date | string
@@ -294,6 +307,7 @@ export type SatelliteUncheckedCreateInput = {
   id?: number
   recordId: string
   slug: string
+  redirect?: string | null
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   active?: boolean
   createdAt?: Date | string
@@ -303,6 +317,7 @@ export type SatelliteUncheckedCreateInput = {
 export type SatelliteUpdateInput = {
   recordId?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  redirect?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -313,6 +328,7 @@ export type SatelliteUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   recordId?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  redirect?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -323,6 +339,7 @@ export type SatelliteCreateManyInput = {
   id?: number
   recordId: string
   slug: string
+  redirect?: string | null
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   active?: boolean
   createdAt?: Date | string
@@ -332,6 +349,7 @@ export type SatelliteCreateManyInput = {
 export type SatelliteUpdateManyMutationInput = {
   recordId?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  redirect?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -342,6 +360,7 @@ export type SatelliteUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   recordId?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  redirect?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -352,6 +371,7 @@ export type SatelliteCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recordId?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  redirect?: Prisma.SortOrder
   data?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -366,6 +386,7 @@ export type SatelliteMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recordId?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  redirect?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -375,6 +396,7 @@ export type SatelliteMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recordId?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  redirect?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -386,6 +408,10 @@ export type SatelliteSumOrderByAggregateInput = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type BoolFieldUpdateOperationsInput = {
@@ -410,6 +436,7 @@ export type SatelliteSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   recordId?: boolean
   slug?: boolean
+  redirect?: boolean
   data?: boolean
   active?: boolean
   createdAt?: boolean
@@ -420,6 +447,7 @@ export type SatelliteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   recordId?: boolean
   slug?: boolean
+  redirect?: boolean
   data?: boolean
   active?: boolean
   createdAt?: boolean
@@ -430,6 +458,7 @@ export type SatelliteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   recordId?: boolean
   slug?: boolean
+  redirect?: boolean
   data?: boolean
   active?: boolean
   createdAt?: boolean
@@ -440,13 +469,14 @@ export type SatelliteSelectScalar = {
   id?: boolean
   recordId?: boolean
   slug?: boolean
+  redirect?: boolean
   data?: boolean
   active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SatelliteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recordId" | "slug" | "data" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["satellite"]>
+export type SatelliteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recordId" | "slug" | "redirect" | "data" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["satellite"]>
 
 export type $SatellitePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Satellite"
@@ -455,6 +485,7 @@ export type $SatellitePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     id: number
     recordId: string
     slug: string
+    redirect: string | null
     data: runtime.JsonValue
     active: boolean
     createdAt: Date
@@ -885,6 +916,7 @@ export interface SatelliteFieldRefs {
   readonly id: Prisma.FieldRef<"Satellite", 'Int'>
   readonly recordId: Prisma.FieldRef<"Satellite", 'String'>
   readonly slug: Prisma.FieldRef<"Satellite", 'String'>
+  readonly redirect: Prisma.FieldRef<"Satellite", 'String'>
   readonly data: Prisma.FieldRef<"Satellite", 'Json'>
   readonly active: Prisma.FieldRef<"Satellite", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Satellite", 'DateTime'>

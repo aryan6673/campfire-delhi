@@ -17,6 +17,7 @@ model Satellite {
   id        Int      @id @default(autoincrement())
   recordId  String   @unique
   slug      String   @unique 
+  redirect  String?
   data      Json
   active    Boolean  @default(true)
   createdAt DateTime @default(now())

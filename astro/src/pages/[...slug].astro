@@ -16,6 +16,10 @@ if (!slug || !slugs.includes(slug)) {
 }
 
 const satelliteData = await getSatelliteData(slug);
+
+if (satelliteData?.redirect) {
+  return Astro.redirect(satelliteData.redirect);
+}
 ---
 
 <!doctype html>

@@ -18,6 +18,7 @@ export async function listOfEventWebsiteData() {
         fields: [
             'slug', //string
             'website_json', //string
+            'website_redirect', //string
             'website_active' //boolean
         ]
     }).all())
@@ -39,6 +40,7 @@ function parseRecord(record: Airtable.Record<Airtable.FieldSet>) {
     const slug = record.get('slug') as string;
     const websiteJson = record.get('website_json') as string;
     const websiteActive = record.get('website_active') === true;
+    const websiteRedirect = record.get('website_redirect') as string;
 
     if (!slug) {
         console.warn(`Skipping record ${record.id}: missing slug`);
@@ -65,7 +67,7 @@ function parseRecord(record: Airtable.Record<Airtable.FieldSet>) {
         data = { error: "Error parsing JSON. Make sure the JSON is valid!" };
     }
 
-    return { recordId: record.id, slug, data, active: websiteActive };
+    return { recordId: record.id, slug, data, active: websiteActive, redirect: websiteRedirect };
 }
 
 class AirtableSyncWorker {
@@ -147,6 +149,7 @@ class AirtableSyncWorker {
                                 slug: data.slug,
                                 data: data.data,
                                 active: data.active,
+                                redirect: data.redirect,
                                 updatedAt: new Date(),
                             },
                         })

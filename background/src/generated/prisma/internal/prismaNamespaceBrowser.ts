@@ -74,6 +74,7 @@ export const SatelliteScalarFieldEnum = {
   id: 'id',
   recordId: 'recordId',
   slug: 'slug',
+  redirect: 'redirect',
   data: 'data',
   active: 'active',
   createdAt: 'createdAt',
@@ -113,4 +114,12 @@ export const JsonNullValueFilter = {
 } as const
 
 export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
