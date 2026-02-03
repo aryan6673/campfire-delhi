@@ -367,7 +367,7 @@ function App() {
             imageSrc="/compressed/ui/step-signup.jpeg"
             imageAlt="Step 1"
           >
-            Find a team of <br></br><span className="font-bold text-[#F77034]">CO-ORGANIZERS</span>
+           <Markdown text={data.localization.steps.step1} />
           </Step>
 
           <Step 
@@ -376,7 +376,7 @@ function App() {
             imageAlt="Step 2"
             isReversed={true}
           >
-            Find a <span className="font-bold text-[#F77034]">VENUE</span> to host your hackathon
+            <Markdown text={data.localization.steps.step2} />
           </Step>
 
           <Step 
@@ -384,7 +384,7 @@ function App() {
             imageSrc="/compressed/ui/step-workshops.webp"
             imageAlt="Step 3"
           >
-            Find <span className="text-[#F77034] font-bold">SPONSORS</span> to buy merch and prizes, and make your event <span className="text-[#F77034] font-bold">SPECIAL!</span>
+             <Markdown text={data.localization.steps.step3} />
           </Step>
 
           <Step 
@@ -393,7 +393,7 @@ function App() {
             imageAlt="Step 4"
             isReversed={true}
           >
-            Buy supplies, order food, learn <span className="text-[#F77034] font-bold"> GAME DEV</span>, and teach <span className="text-[#F77034] font-bold">WORKSHOPS</span>
+             <Markdown text={data.localization.steps.step4} />
           </Step>
           
           <div className="flex justify-end mt-12">
@@ -406,10 +406,50 @@ function App() {
                 className="text-5xl md:text-6xl font-normal font-dream-planner"
                 style={{ color: "rgba(255, 255, 255, 0.69)" }}
               >
-                FULL ORGANIZERS GUIDE
+                {data.localization.steps.guideButton}
               </p>
             </button>
           </div>
+        </div>
+
+        <div id="schedule" className="relative z-40 flex flex-col items-center gap-8 mt-24 px-4 w-full max-w-7xl mx-auto">
+             <h2 
+               className="text-[#fcf5ed] text-6xl md:text-8xl font-bold font-dream-planner text-center"
+               style={{ textShadow: "0px 4px 4px rgba(0,0,0,0.25)" }}
+             >
+               {data.localization.schedule.title}
+             </h2>
+             <div className="flex flex-col gap-6 w-full max-w-4xl">
+               {data.event.schedule.days.map((day, i) => (
+                 <div key={i} className="bg-[#fcf5ed] rounded-xl p-6 md:p-8 shadow-lg transform rotate-[-1deg]">
+                    <h3 className="text-3xl md:text-4xl font-bold text-[#8d3f34] font-dream-planner mb-6">{day.date}</h3>
+                    <div className="flex flex-col gap-4">
+                      {day.items.map((item, j) => (
+                        <div key={j} className="flex flex-col md:flex-row gap-2 md:gap-8 text-xl md:text-2xl font-ember-and-fire text-[#854d16] border-b border-[#854d16]/10 pb-2 last:border-0 last:pb-0">
+                           <span className="font-bold min-w-[150px]">{item.time}</span>
+                           <span>{item.activity}</span>
+                        </div>
+                      ))}
+                    </div>
+                 </div>
+               ))}
+             </div>
+        </div>
+
+        <div id="sponsors" className="relative z-40 flex flex-col items-center gap-8 mt-24 px-4 pb-32 w-full max-w-7xl mx-auto">
+             <h2 
+               className="text-[#fcf5ed] text-6xl md:text-8xl font-bold font-dream-planner text-center"
+               style={{ textShadow: "0px 4px 4px rgba(0,0,0,0.25)" }}
+             >
+               {data.localization.sponsors.title}
+             </h2>
+             <div className="flex flex-wrap justify-center gap-8 md:gap-12 items-center">
+               {data.event.sponsors.cards.map((card, i) => (
+                 <a key={i} href={card.link} target="_blank" className="hover:scale-105 transition-transform bg-white rounded-xl p-4 shadow-lg">
+                    <img src={card.logo} alt={card.sponsor} className="h-12 md:h-16 object-contain" />
+                 </a>
+               ))}
+             </div>
         </div>
       </section>
 
@@ -423,34 +463,24 @@ function App() {
           <div className='flex items-center min-[1200px]:block min-[1200px]:relative'>
             <img src='/backgrounds/world-map-right.webp' alt='' className='h-full hidden min-[1200px]:block' />
             <div className='min-[1200px]:absolute min-[1200px]:top-0 min-[1200px]:left-0 py-12 min-[1200px]:py-16 min-[1200px]:pb-0 rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.25)] min-[1200px]:rounded-none min-[1200px]:shadow-none min-[1200px]:pt-30 pl-6 min-[1200px]:pl-12 pr-6 min-[1200px]:pr-64 text-xl bg-[#EAD6BE] border-[#DCA87E] border-4 min-[1200px]:border-0 min-[1200px]:bg-transparent flex flex-col gap-6 font-solway'>
-              <h1>Dear hacker,</h1>
+              <h1>{data.localization.letter.greeting}</h1>
               <p>
-                You can make a change: inspire someone to build a game for the first time, help someone
-                fall in love with computers, run an <i>incredible</i> game jam that you can invite all your
-                friends to. 
+                {data.localization.letter.paragraph1}
               </p>
 
-              <p><b>This February, what if you organized a game jam in your city?</b></p>
+              <p><b>{data.localization.letter.paragraph2}</b></p>
 
               <p>
-                Hack Club will provide guides, funding, merch, and 1-on-1 mentorship. Our goal?
-                Run 200 game jams in 200 cities worldwide. All on the same day. All run by high
-                schoolers like us.
+                {data.localization.letter.paragraph3}
               </p>
 
               <p>
-                To kick off 2026, we’re so excited to invite you to Campfire. In just a couple
-                months, you will learn how to raise money for your event, buy food and drinks
-                for your attendees, and make your own video games with your friends!
+                {data.localization.letter.paragraph4}
               </p>
 
               <p>
-                Let’s go on an adventure together.
-              </p>
-
-              <p>
-                With love, <br />
-                The Campfire Team
+                {data.localization.letter.closing} <br />
+                <span className="whitespace-pre-wrap">{data.localization.letter.signature}</span>
               </p>
             </div>
           </div>
@@ -542,7 +572,7 @@ function App() {
               textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
             }}
           >
-            Favorite games from past events
+            {data.localization.nav["games-made"]}
           </h2>
           
           <div className="flex flex-col md:flex-row gap-16 md:gap-5 w-full justify-between">
@@ -610,7 +640,7 @@ function App() {
               textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
             }}
           >
-            FAQ
+            {data.localization.faq.title}
           </h2>
 
           <div className="flex flex-col md:flex-row gap-32 md:gap-10 justify-center items-center md:items-start">
@@ -628,25 +658,15 @@ function App() {
                     textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                   }}
                 >
-                  Participant
+                  {data.localization.faq.participant.title}
                 </p>
                 
-                <FaqQuestion question="What is a game jam?">
-                  A game jam is an event where you build a game from scratch in a short time period! It's all about creativity, teamwork, and having fun while learning new skills.
-                </FaqQuestion>
-                <FaqQuestion question="Am I eligible?">
-                  If you're a high schooler (or younger), you're eligible! No prior experience required - just bring your enthusiasm and willingness to learn.
-                </FaqQuestion>
-                <FaqQuestion question="But I've never hacked before!">
-                  Perfect! Game jams are designed for beginners. You'll have workshops, mentors, and teammates to help you every step of the way.
-                </FaqQuestion>
-                <FaqQuestion question="All this, for free?">
-                  Yes! Everything is completely free - venue, food, swag, workshops, and prizes. Hack Club covers all costs so you can focus on creating.
-                </FaqQuestion>
-                <FaqQuestion question="What do I need to bring?">
-                  Just bring yourself, a laptop, charger, and any personal items you need. We'll provide food, drinks, and everything else!
-                </FaqQuestion>
-                <FaqButton content="Check out the parent guide" />
+                {data.localization.faq.participant.questions.map((q, i) => (
+                  <FaqQuestion key={i} question={q.question}>
+                    {q.answer}
+                  </FaqQuestion>
+                ))}
+                <FaqButton content={data.localization.faq.participant.buttonText} />
               </div>
             </div>
 
@@ -664,25 +684,15 @@ function App() {
                     textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                   }}
                 >
-                  Organizer
+                  {data.localization.faq.organizer.title}
                 </p>
                 
-                <FaqQuestion question="Can I organize a Campfire in my city?">
-                  Absolutely! We're always looking for passionate organizers. If you're ready to bring the magic of game development to your community, we'd love to help.
-                </FaqQuestion>
-                <FaqQuestion question="What are the steps to organizing?">
-                  First, apply through our organizer form. Then we'll guide you through venue booking, team building, workshop planning, and day-of coordination.
-                </FaqQuestion>
-                <FaqQuestion question="Do we get funding?">
-                  Yes! Hack Club provides funding for venue, food, swag, and other event costs. We want to remove financial barriers for amazing events.
-                </FaqQuestion>
-                <FaqQuestion question="Do we get volunteer hours?">
-                  Many schools accept organizing hours as community service. Check with your school's requirements - we can provide documentation.
-                </FaqQuestion>
-                <FaqQuestion question="Can I join an organizing team?">
-                  Of course! Many cities have organizing teams. Reach out to organizers in your area or apply to join an existing team.
-                </FaqQuestion>
-                <FaqButton href={FORM_URL_ORGANIZER_APPLICATION} content="Apply to be an organizer" />
+                {data.localization.faq.organizer.questions.map((q, i) => (
+                  <FaqQuestion key={i} question={q.question}>
+                    {q.answer}
+                  </FaqQuestion>
+                ))}
+                <FaqButton href={FORM_URL_ORGANIZER_APPLICATION} content={data.localization.faq.organizer.buttonText} />
               </div>
             </div>
           </div>
@@ -703,27 +713,27 @@ function App() {
               textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
             }}
           >
-            made with love by Hack Club & Open Sauce
+            {data.localization.footer.tagline}
           </p>
 
           <div className="mt-8 flex flex-col md:flex-row gap-16 max-w-6xl mx-auto px-4">
             <div className="flex flex-col items-center md:items-end gap-4 text-white text-4xl md:text-3xl font-ember-and-fire font-bold z-20">
-              <a href="https://hackclub.com/" target="_blank" className="hover:underline">Hack Club</a>
-              <a href="https://hackclub.com/slack" target="_blank" className="hover:underline">Slack</a>
-              <a href="https://hackclub.com/clubs" target="_blank" className="hover:underline">Clubs</a>
-              <a href="https://hackclub.com/conduct/" target="_blank" className="hover:underline">Code of Conduct</a>
+              {data.localization.footer.links.map((link, i) => (
+                <a key={i} href={link.href} target="_blank" className="hover:underline">{link.text}</a>
+              ))}
             
               <p className="text-white text-sm md:text-md text-right max-w-96 font-ember-and-fire">
-                © 2026 Hack Club. 501(c)(3) nonprofit (EIN: 81-2908499)
+                {data.localization.footer.copyright}
               </p>
             </div>
             
             <div className="flex-1 text-left">
               <p className="text-white text-lg md:text-xl font-ember-and-fire leading-relaxed mb-4">
-                Hack Club is a 501(c)(3) nonprofit and network of 60k+ technical high schoolers. We believe you learn best by building so we're creating community and providing grants so you can make awesome projects. In the past few years, we've partnered with GitHub to run <a href="https://summer.hackclub.com/" target="_blank" className="underline hover:text-gray-300">Summer of Making</a>, hosted the <a href="https://github.com/hackclub/the-hacker-zephyr" target="_blank" className="underline hover:text-gray-300">world's longest hackathon on land</a>, and ran <a href="https://www.youtube.com/watch?v=QvCoISXfcE8" target="_blank" className="underline hover:text-gray-300">Canada's largest high school hackathon</a>.
+               {data.localization.footer.description}
+                  <a href="https://summer.hackclub.com/" target="_blank" className="underline hover:text-gray-300">Summer of Making</a>, hosted the <a href="https://github.com/hackclub/the-hacker-zephyr" target="_blank" className="underline hover:text-gray-300">world's longest hackathon on land</a>, and ran <a href="https://www.youtube.com/watch?v=QvCoISXfcE8" target="_blank" className="underline hover:text-gray-300">Canada's largest high school hackathon</a>.
               </p>
               <p className="text-white text-lg md:text-xl font-ember-and-fire font-bold">
-                At Hack Club, students aren't just learning, they're shipping.
+               {data.localization.footer.closing}
               </p>
             </div>
           </div>
