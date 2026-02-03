@@ -7,9 +7,27 @@ import NavbarLink from './components/NavbarLink.tsx';
 import VideoEmbed from './components/VideoEmbed.tsx';
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
+import data from './data.json';
 
 const FORM_URL_ORGANIZER_APPLICATION = "https://forms.hackclub.com/t/8L51MzWyrHus";
 const FORM_URL_RSVP = "https://forms.hackclub.com/t/a3QSt8MuvHus";
+
+function Markdown({ text }: { text: string }) {
+  const parts = text.split(/(\*\*.*?\*\*|__.*?__)/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return <span key={i} className="font-bold">{part.slice(2, -2)}</span>;
+        }
+        if (part.startsWith('__') && part.endsWith('__')) {
+           return <span key={i} className="italic">{part.slice(2, -2)}</span>;
+        }
+        return part;
+      })}
+    </>
+  );
+}
 
 function FlagshipCTA({ className, compact, maxWidth }: { className?: string; compact?: boolean; maxWidth?: boolean }) {
   return (
@@ -104,12 +122,10 @@ function App() {
       <div className="w-full h-screen">
         <header className="relative h-[60px] md:h-[115px] bg-[#45b4f5] justify-end items-center content-center md:pr-16 hidden sm:flex">
           <nav className="flex gap-4 w-full justify-between px-8 md:px-0 text-2xl md:gap-12 items-center md:justify-end text-white md:text-3xl xl:text-5xl font-bold font-ember-and-fire">
-            <NavbarLink onClick={() => scrollToSection('steps')}>How to organize</NavbarLink>
-            {/* <NavbarLink onClick={() => scrollToSection('map')}>Map</NavbarLink> */}
-            {/* <NavbarLink onClick={() => scrollToSection('letter')}>Letter</NavbarLink> */}
-            <NavbarLink onClick={() => scrollToSection('previous-events')}>Past events</NavbarLink>
-            <NavbarLink onClick={() => scrollToSection('games-made')}>Games made</NavbarLink>
-            <NavbarLink onClick={() => scrollToSection('faq')}>FAQ</NavbarLink>
+            <NavbarLink onClick={() => scrollToSection('steps')}>{data.localization.nav.steps}</NavbarLink>
+            <NavbarLink onClick={() => scrollToSection('schedule')}>{data.localization.nav.schedule}</NavbarLink>
+            <NavbarLink onClick={() => scrollToSection('games-made')}>{data.localization.nav['games-made']}</NavbarLink>
+            <NavbarLink onClick={() => scrollToSection('faq')}>{data.localization.nav.faq}</NavbarLink>
           </nav>
         </header>
 
@@ -157,14 +173,14 @@ function App() {
             />
           </div>
           
-          <FlagshipCTA 
+          {data.localization.hero.ctaSecondary && <FlagshipCTA 
             className={clsx(
               "hidden min-[860px]:flex justify-center w-full absolute left-0 right-0 z-40",
               windowHeight < 950 ? "-top-8" : "top-4"
             )} 
             maxWidth 
             compact={windowHeight < 830}
-          />
+          />}
 
           <div className="flex flex-col md:flex-row justify-between items-center md:items-start xl:items-center w-full gap-8 pb-16 z-30 h-full pt-16 md:pt-0 md:h-auto">
             <div className={clsx(
@@ -172,7 +188,7 @@ function App() {
               windowHeight > windowWidth && windowWidth < 860 && "justify-between h-full"
             )}>
               <div className="mb-6">
-                {windowWidth >= 400 && <FlagshipCTA className="min-[860px]:hidden -mt-12 mb-8" compact={windowWidth < 500} />}
+                {windowWidth >= 400 && data.localization.hero.ctaSecondary && <FlagshipCTA className="min-[860px]:hidden -mt-12 mb-8" compact={windowWidth < 500} />}
 
                 <div className="flex items-center gap-3 mb-4 relative z-30">
                   <a href='https://hackclub.com' className='transition-transform hover:scale-105 active:scale-95'>
@@ -205,7 +221,7 @@ function App() {
                       textShadow: "5px 8px 0px rgba(0,0,0,0.25)"
                     }}
                   >
-                    CAMPFIRE
+                    {data.localization.hero.campfire}
                   </h1>
                 </div>
 
@@ -216,7 +232,7 @@ function App() {
                       textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                     }}
                   >
-                    Game jam for high schoolers in 200+ cities
+                    {data.localization.hero.subtitle}
                   </p>
                   <p 
                     className="text-white text-4xl md:text-3xl xl:text-4xl font-bold font-ember-and-fire"
@@ -224,7 +240,15 @@ function App() {
                       textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
                     }}
                   >
-                    Feb 28 - Mar 1, 2026
+                     {data.localization.hero.hostedAt}{data.event.venue.name}
+                  </p>
+                  <p 
+                    className="text-white text-4xl md:text-3xl xl:text-4xl font-bold font-ember-and-fire"
+                    style={{ 
+                      textShadow: "0px 4px 4px rgba(0,0,0,0.25)"
+                    }}
+                  >
+                    {data.event.date}
                   </p>
                 </div>
               </div>
@@ -245,8 +269,8 @@ function App() {
                       onChange={e => setEmail(e.target.value)}
                       type="email"
                       className="text-[#854d16] text-2xl md:text-4xl font-bold truncate bg-transparent border-none outline-none flex-1 cursor-text font-ember-and-fire"
-                      placeholder="you@hackclub.com"
-                      defaultValue="you@hackclub.com"
+                      placeholder={data.localization.hero.emailPlaceholder}
+                      defaultValue={data.localization.hero.emailPlaceholder}
                     />
                   </div>
                   
@@ -258,7 +282,7 @@ function App() {
                     <p 
                       className="text-[#8d3f34] text-3xl md:text-5xl font-normal font-dream-planner"
                     >
-                    RSVP!
+                    {data.localization.hero.ctaPrimary}
                     </p>
                   </button>
                 </div>
